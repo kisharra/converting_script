@@ -1,0 +1,8 @@
+2024-06-11 00:19:15,526:ERROR:/file_storage/film_storage/A/A.Good.Year.2006.Hybrid.1080p.Open.Matte.BLUEBIRD.mkv: Command '['ffmpeg', '-i', '/file_storage/film_storage/A/A.Good.Year.2006.Hybrid.1080p.Open.Matte.BLUEBIRD.mkv', '-c:v', 'libx264', '-c:a', 'ac3', '-map', '0:v:0', '-map', '0:a:0', '-b:v', '4096k', '-b:a', '192k', '-preset:v', 'ultrafast', '-strict', 'experimental', '-movflags', '+faststart', '/file_storage/film_storage/A/A.Good.Year.2006.Hybrid.1080p.Open.Matte.BLUEBIRD.mp4']' returned non-zero exit status 1.
+2024-06-14 01:32:04,485:ERROR:/file_storage/film_storage/A/A.Good.Year.2006.Hybrid.1080p.Open.Matte.BLUEBIRD.mkv: 'ConvertTask' object has no attribute 'bitrate_video'
+2024-06-14 01:56:43,475:DEBUG:Running ffprobe command: ffprobe -v quiet -print_format json -show_format -show_streams None
+2024-06-14 01:56:43,514:ERROR:Conversion did not produce a valid output path.
+2024-06-14 02:00:23,811:DEBUG:Running ffprobe command: ffprobe -v quiet -print_format json -show_format -show_streams None
+2024-06-14 02:00:23,852:ERROR:Conversion did not produce a valid output path.
+2024-06-14 02:03:15,126:DEBUG:Running ffprobe command: ffprobe -v quiet -print_format json -show_format -show_streams None
+2024-06-14 02:03:15,183:ERROR:Conversion did not produce a valid output path.
