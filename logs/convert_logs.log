@@ -1,8 +1,86 @@
-2024-06-11 00:19:15,526:ERROR:/file_storage/film_storage/A/A.Good.Year.2006.Hybrid.1080p.Open.Matte.BLUEBIRD.mkv: Command '['ffmpeg', '-i', '/file_storage/film_storage/A/A.Good.Year.2006.Hybrid.1080p.Open.Matte.BLUEBIRD.mkv', '-c:v', 'libx264', '-c:a', 'ac3', '-map', '0:v:0', '-map', '0:a:0', '-b:v', '4096k', '-b:a', '192k', '-preset:v', 'ultrafast', '-strict', 'experimental', '-movflags', '+faststart', '/file_storage/film_storage/A/A.Good.Year.2006.Hybrid.1080p.Open.Matte.BLUEBIRD.mp4']' returned non-zero exit status 1.
-2024-06-14 01:32:04,485:ERROR:/file_storage/film_storage/A/A.Good.Year.2006.Hybrid.1080p.Open.Matte.BLUEBIRD.mkv: 'ConvertTask' object has no attribute 'bitrate_video'
-2024-06-14 01:56:43,475:DEBUG:Running ffprobe command: ffprobe -v quiet -print_format json -show_format -show_streams None
-2024-06-14 01:56:43,514:ERROR:Conversion did not produce a valid output path.
-2024-06-14 02:00:23,811:DEBUG:Running ffprobe command: ffprobe -v quiet -print_format json -show_format -show_streams None
-2024-06-14 02:00:23,852:ERROR:Conversion did not produce a valid output path.
-2024-06-14 02:03:15,126:DEBUG:Running ffprobe command: ffprobe -v quiet -print_format json -show_format -show_streams None
-2024-06-14 02:03:15,183:ERROR:Conversion did not produce a valid output path.
+2024-06-19 05:13:49,149:ERROR:Error connecting to database: __enter__
+2024-06-19 05:13:49,149:ERROR:Error connecting to database: __enter__
+2024-06-19 05:13:49,149:ERROR:Error connecting to database: __enter__
+2024-06-19 05:13:49,206:ERROR:Error connecting to database: __enter__
+2024-06-19 05:13:49,294:ERROR:Error connecting to database: __enter__
+2024-06-19 05:13:49,334:ERROR:Error connecting to database: __enter__
+2024-06-19 05:13:49,387:ERROR:Error connecting to database: __enter__
+2024-06-19 05:13:49,448:ERROR:Error connecting to database: __enter__
+2024-06-19 05:13:49,509:ERROR:Error connecting to database: __enter__
+2024-06-19 05:13:49,573:ERROR:Error connecting to database: __enter__
+2024-06-19 05:13:49,635:ERROR:Error connecting to database: __enter__
+2024-06-19 05:13:49,697:ERROR:Error connecting to database: __enter__
+2024-06-19 05:13:49,763:ERROR:Error connecting to database: __enter__
+2024-06-19 05:14:26,174:ERROR:Error connecting to database: __enter__
+2024-06-19 05:14:26,174:ERROR:Error connecting to database: __enter__
+2024-06-19 05:14:26,175:ERROR:Error connecting to database: __enter__
+2024-06-19 05:14:26,242:ERROR:Error connecting to database: __enter__
+2024-06-19 05:14:26,315:ERROR:Error connecting to database: __enter__
+2024-06-19 05:14:26,362:ERROR:Error connecting to database: __enter__
+2024-06-19 05:14:26,426:ERROR:Error connecting to database: __enter__
+2024-06-19 05:14:26,488:ERROR:Error connecting to database: __enter__
+2024-06-19 05:14:26,551:ERROR:Error connecting to database: __enter__
+2024-06-19 05:14:26,591:ERROR:Error connecting to database: __enter__
+2024-06-19 05:14:26,657:ERROR:Error connecting to database: __enter__
+2024-06-19 05:14:26,703:ERROR:Error connecting to database: __enter__
+2024-06-19 05:14:26,750:ERROR:Error connecting to database: __enter__
+2024-06-19 07:08:32,745:ERROR:/file_storage/film_storage/A/A.Good.Year.2006.Hybrid.1080p.Open.Matte.BLUEBIRD.mkv: ffmpeg version 4.4.2-0ubuntu0.22.04.1 Copyright (c) 2000-2021 the FFmpeg developers
+  built with gcc 11 (Ubuntu 11.2.0-19ubuntu1)
+  configuration: --prefix=/usr --extra-version=0ubuntu0.22.04.1 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared
+  libavutil      56. 70.100 / 56. 70.100
+  libavcodec     58.134.100 / 58.134.100
+  libavformat    58. 76.100 / 58. 76.100
+  libavdevice    58. 13.100 / 58. 13.100
+  libavfilter     7.110.100 /  7.110.100
+  libswscale      5.  9.100 /  5.  9.100
+  libswresample   3.  9.100 /  3.  9.100
+  libpostproc    55.  9.100 / 55.  9.100
+Hyper fast Audio and Video encoder
+usage: ffmpeg [options] [[infile options] -i infile]... {[outfile options] outfile}...
+
+Use -h to get full help or, even better, run 'man ffmpeg'
+
+2024-06-19 07:32:48,918:ERROR:/file_storage/film_storage/A/A.Good.Year.2006.Hybrid.1080p.Open.Matte.BLUEBIRD.mkv: cannot unpack non-iterable NoneType object
+2024-06-19 07:43:33,538:ERROR:/file_storage/film_storage/A/A.Good.Year.2006.Hybrid.1080p.Open.Matte.BLUEBIRD.mkv: ffmpeg version 4.4.2-0ubuntu0.22.04.1 Copyright (c) 2000-2021 the FFmpeg developers
+  built with gcc 11 (Ubuntu 11.2.0-19ubuntu1)
+  configuration: --prefix=/usr --extra-version=0ubuntu0.22.04.1 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared
+  libavutil      56. 70.100 / 56. 70.100
+  libavcodec     58.134.100 / 58.134.100
+  libavformat    58. 76.100 / 58. 76.100
+  libavdevice    58. 13.100 / 58. 13.100
+  libavfilter     7.110.100 /  7.110.100
+  libswscale      5.  9.100 /  5.  9.100
+  libswresample   3.  9.100 /  3.  9.100
+  libpostproc    55.  9.100 / 55.  9.100
+Hyper fast Audio and Video encoder
+usage: ffmpeg [options] [[infile options] -i infile]... {[outfile options] outfile}...
+
+Use -h to get full help or, even better, run 'man ffmpeg'
+
+2024-06-20 00:36:53,437:ERROR:Program interrupted manually
+2024-06-20 00:48:42,937:ERROR:/file_storage/film_storage/A/A.Good.Year.2006.Hybrid.1080p.Open.Matte.BLUEBIRD.mkv: ffmpeg version 4.4.2-0ubuntu0.22.04.1 Copyright (c) 2000-2021 the FFmpeg developers
+  built with gcc 11 (Ubuntu 11.2.0-19ubuntu1)
+  configuration: --prefix=/usr --extra-version=0ubuntu0.22.04.1 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared
+  libavutil      56. 70.100 / 56. 70.100
+  libavcodec     58.134.100 / 58.134.100
+  libavformat    58. 76.100 / 58. 76.100
+  libavdevice    58. 13.100 / 58. 13.100
+  libavfilter     7.110.100 /  7.110.100
+  libswscale      5.  9.100 /  5.  9.100
+  libswresample   3.  9.100 /  3.  9.100
+  libpostproc    55.  9.100 / 55.  9.100
+Hyper fast Audio and Video encoder
+usage: ffmpeg [options] [[infile options] -i infile]... {[outfile options] outfile}...
+
+Use -h to get full help or, even better, run 'man ffmpeg'
+
+2024-06-20 02:36:45,521:ERROR:Program interrupted manually
+2024-06-20 02:52:08,857:ERROR:/file_storage/film_storage/A/A.Good.Year.2006.Hybrid.1080p.Open.Matte.BLUEBIRD.mkv: no such column: bitrate
+2024-06-20 02:56:30,504:ERROR:/file_storage/film_storage/K/Korol.i.Shut/Korol.i.Shut.S01.E04.2023.WEBRip.1080p.mkv: no such column: bitrate
+2024-06-20 02:59:59,213:ERROR:/file_storage/film_storage/K/Korol.i.Shut/Korol.i.Shut.S01.E02.2023.WEBRip.1080p.mkv: no such column: bitrate
+2024-06-20 03:03:17,732:ERROR:/file_storage/film_storage/K/Korol.i.Shut/Korol.i.Shut.S01.E07.2023.WEBRip.1080p.mkv: no such column: bitrate
+2024-06-20 03:06:39,907:ERROR:/file_storage/film_storage/K/Korol.i.Shut/Korol.i.Shut.S01.E01.2023.WEBRip.1080p.mkv: no such column: bitrate
+2024-06-20 03:10:33,363:ERROR:/file_storage/film_storage/K/Korol.i.Shut/Korol.i.Shut.S01.E05.2023.WEBRip.1080p.mkv: no such column: bitrate
+2024-06-20 03:14:28,457:ERROR:/file_storage/film_storage/K/Korol.i.Shut/Korol.i.Shut.S01.E06.2023.WEBRip.1080p.mkv: no such column: bitrate
+2024-06-20 03:18:36,373:ERROR:/file_storage/film_storage/K/Korol.i.Shut/Korol.i.Shut.S01.E08.2023.WEBRip.1080p.mkv: no such column: bitrate
+2024-06-20 03:23:09,572:ERROR:/file_storage/film_storage/K/Korol.i.Shut/Korol.i.Shut.S01.E03.2023.WEBRip.1080p.mkv: no such column: bitrate

@@ -1,7 +1,7 @@
 {
     "db_file": "/opt/film_storage.db",
     "log_file": "/file_storage/work_scripts/logs/convert_logs.log",
-    "file_path": "/file_storage/film_storage/",
+    "directory": "/file_storage/film_storage/",
     "data_format": "%Y-%m-%d %H:%M:%S",
     "ffmpeg_command": [
       "ffmpeg",
