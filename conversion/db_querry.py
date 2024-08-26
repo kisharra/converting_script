@@ -1,4 +1,5 @@
 import sqlite3
+import mariadb
 import logging
 import json
 
@@ -6,6 +7,7 @@ class Db_querry():
     def __init__(self, config):
         self.config = config
         self.db_file = config['db_file']
+        self.maria_db = config['maria_db']
         self.log_file = config['log_file']
         logging.basicConfig(filename=self.log_file, level=logging.ERROR, format='%(asctime)s:%(message)s')
 
@@ -100,7 +102,7 @@ class Db_querry():
             else:
                 print(f"Data already exists for {data['format']['filename']}")
     
-    def interruted_program(self, current_time, file_id):
+    def interrupted_program(self, current_time, file_id):
         with sqlite3.connect(self.db_file) as conn:
             cur = conn.cursor()
             cur.execute('UPDATE ConversionTasks SET status=?, end_time=? WHERE file_id=?', ('Error: check logs', current_time, file_id))  #update if program interrupted
@@ -135,6 +137,15 @@ class Db_querry():
             cur = conn.cursor()
             cur.execute('UPDATE ConversionTasks SET status=?, end_time=?, check_integrity=? WHERE file_id=?', (status, current_time, check_result, file_id))  #update status of checking
             conn.commit()
+
+    def update_url_file(self, filename, output_file):
+        with mariadb.connect(self.maria_db) as conn:
+            cur = conn.cursor()
+            cur.execute(
+            'UPDATE video_series_files SET url = REPLACE(url, ?, ?) WHERE url LIKE ?',
+            (filename, output_file, '%' + filename)
+        )
+            conn.commit()  
     
 
 if __name__ == '__main__':

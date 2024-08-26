@@ -1,0 +1,6 @@
+# disable virtualenv commit
+.venv
+# disable .env
+.env
+# disable to commit pycache
+**/__pycache__

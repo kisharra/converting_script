@@ -1,33 +1,40 @@
 {
-    "db_file": "/opt/film_storage.db",
-    "log_file": "/file_storage/work_scripts/logs/convert_logs.log",
-    "directory": "/file_storage/film_storage/",
-    "data_format": "%Y-%m-%d %H:%M:%S",
-    "ffmpeg_command": [
-      "ffmpeg",
-      "-i", "{input_file}",
-      "-c:v", "libx264",
-      "-c:a", "ac3",
-      "-map", "0:v:0",
-      "-map", "0:a:0",
-      "-b:v", "{b_v}",
-      "-b:a", "{b_a}",
-      "-preset:v", "ultrafast",
-      "-strict", "experimental",
-      "-movflags", "+faststart",
-      "{output_file}"
-    ],
-    "ffmpeg_check_command": [
-      "ffmpeg",
-      "-v", "error",
-      "-i", "{output_file}",
-      "-f", "null",
-      "-"
-    ],
-    "bitrate_video_film": "4096k",
-    "bitrate_video_serial": "2048k",
-    "bitrate_audio": "192k",
-    "ffprobe_command": [
-        "ffprobe", "-v", "quiet", "-print_format", "json", "-show_format", "-show_streams", "{file_path}"
-    ]
-  }
+  "db_file": "/opt/film_storage.db",
+  "maria_db": {
+    "host": "172.28.1.240",
+    "port": 3306,
+    "user": "stalker2",
+    "password": "${DB_PASSWORD}",
+    "database": "stalker_db"
+  },
+  "log_file": "/file_storage/work_scripts/logs/convert_logs.log",
+  "directory": "/file_storage/film_storage/",
+  "data_format": "%Y-%m-%d %H:%M:%S",
+  "ffmpeg_command": [
+    "ffmpeg",
+    "-i", "{input_file}",
+    "-c:v", "libx264",
+    "-c:a", "ac3",
+    "-map", "0:v:0",
+    "-map", "0:a:0",
+    "-b:v", "{b_v}",
+    "-b:a", "{b_a}",
+    "-preset:v", "ultrafast",
+    "-strict", "experimental",
+    "-movflags", "+faststart",
+    "{output_file}"
+  ],
+  "ffmpeg_check_command": [
+    "ffmpeg",
+    "-v", "error",
+    "-i", "{output_file}",
+    "-f", "null",
+    "-"
+  ],
+  "bitrate_video_film": "4096k",
+  "bitrate_video_serial": "2048k",
+  "bitrate_audio": "192k",
+  "ffprobe_command": [
+      "ffprobe", "-v", "quiet", "-print_format", "json", "-show_format", "-show_streams", "{file_path}"
+  ]
+}

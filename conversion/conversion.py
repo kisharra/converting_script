@@ -5,8 +5,7 @@ from datetime import datetime
 import logging
 import signal
 import sys
-from package.db_querry import Db_querry
-
+from conversion.db_querry import Db_querry
 
 
 
@@ -89,9 +88,10 @@ class ConvertTask:
         '''initialize class variables'''
         self.config = config
         self.db_file = config['db_file']
+        self.maria_db = config['maria_db']
         self.log_file = config['log_file']
         self.data_format = config['data_format']
-        self.ffmpeg_command = config['ffmpeg_command']
+        self.ffmpeg_cpu = config['ffmpeg']
         self.ffmpeg_check_command = config['ffmpeg_check_command']
         self.bitrate_video_film = config['bitrate_video_film']
         self.bitrate_video_serials = config['bitrate_video_serial']
@@ -102,9 +102,6 @@ class ConvertTask:
         self.get_info = Get_Info(config)
         self.db_file = Db_querry(config)
         logging.basicConfig(filename=self.log_file, level=logging.ERROR, format='%(asctime)s:%(message)s')  #logging to file
-
-    def multiprocess(self):
-        pass
     
     def signal_handler(self, signum, frame):
         '''Signal handler for SIGINT signal'''
@@ -113,19 +110,27 @@ class ConvertTask:
         for file in self.remove_list:  #remove temporary files
             os.remove(file)
         if self.file_id is not None:
-            self.db_file.interruted_program(datetime.now().strftime(self.data_format), self.file_id)
+            self.db_file.interrupted_program(datetime.now().strftime(self.data_format), self.file_id)
         sys.exit(1)
-
 
     def run_ffmpeg(self, input_file, output_file, bitrate):
         '''run ffmpeg command'''
-        try:
-            command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a) for arg in self.ffmpeg_command]  #run ffmpeg command which is in config
-            subprocess.run(command, check=True)
-            return True
-        except subprocess.CalledProcessError as e:
-            logging.error(f"Error running ffmpeg: {e}")
-            return False
+        if self.check_nvidia_driver():
+            try:
+                command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a) for arg in self.ffmpeg_nvidia]  #run ffmpeg command which is in config
+                subprocess.run(command, check=True)
+                return True
+            except subprocess.CalledProcessError as e:
+                logging.error(f"Error running ffmpeg: {e}")
+                return False
+        else:
+            try:
+                command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a) for arg in self.ffmpeg_cpu]  #run ffmpeg command which is in config
+                subprocess.run(command, check=True)
+                return True
+            except subprocess.CalledProcessError as e:
+                logging.error(f"Error running ffmpeg: {e}")
+                return False
 
     def check_integrity(self, output_file):
         '''check if output file is corrupted'''
@@ -176,6 +181,7 @@ class ConvertTask:
                                 if video_info:
                                     streams = self.get_info.streams_data(video_info)  #get streams info of converted file
                                     self.db_file.update_files_table(output_file, True, len(streams), video_info['format']['size'], video_info['format']['bit_rate'], json.dumps(streams), file_id)  #update table 'Files' with new data
+                                    self.db_file.update_url_file(filename, output_file)  #update table 'Video_Series_Files' on Stalker Portal with new url
                                 # os.remove(filename)  #remove original file
                             else:
                                 logging.error(f'{filename}: {check_result}')
