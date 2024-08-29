@@ -4,3 +4,5 @@
 .env
 # disable to commit pycache
 **/__pycache__
+# disable virt_venv
+virt_env
