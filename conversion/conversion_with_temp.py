@@ -94,7 +94,8 @@ class ConvertTask:
         self.maria_db = config['maria_db']
         self.log_file = config['log_file']
         self.data_format = config['data_format']
-        self.ffmpeg_cpu = config['ffmpeg']
+        self.ffmpeg_cpu = config['ffmpeg_cpu']
+        self.ffmpeg_nvidia = config['ffmpeg_nvidia']
         self.ffmpeg_check_command = config['ffmpeg_check_command']
         self.bitrate_video_film = config['bitrate_video_film']
         self.bitrate_video_serials = config['bitrate_video_serial']
@@ -121,7 +122,7 @@ class ConvertTask:
         '''run ffmpeg command'''
         if self.check_nvidia_driver():
             try:
-                command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a) for arg in self.ffmpeg_nvidia]  #run ffmpeg command which is in config
+                command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a) for arg in self.ffmpeg_nvidia]  #run ffmpeg command with nvidia driver which is in config
                 subprocess.run(command, check=True)
                 return True
             except subprocess.CalledProcessError as e:
@@ -129,7 +130,7 @@ class ConvertTask:
                 return False
         else:
             try:
-                command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a) for arg in self.ffmpeg_cpu]  #run ffmpeg command which is in config
+                command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a) for arg in self.ffmpeg_cpu]  #run ffmpeg command with cpu which is in config
                 subprocess.run(command, check=True)
                 return True
             except subprocess.CalledProcessError as e:
@@ -146,6 +147,17 @@ class ConvertTask:
                 return True, 'No errors found'
         except Exception as e:
             return False, str(e)
+        
+    def check_nvidia_driver(self):
+        '''check if nvidia driver is installed'''
+        try:
+            result = subprocess.run(['nvidia-smi'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            if result.stderr:
+                return False
+            else:
+                return True
+        except Exception as e:
+            return False
 
     def convert_files(self):
         '''convert files to mp4 format'''

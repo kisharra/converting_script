@@ -7,10 +7,24 @@
     "password": "${DB_PASSWORD}",
     "database": "stalker_db"
   },
-  "log_file": "/file_storage/work_scripts/logs/convert_logs.log",
-  "directory": "/file_storage/film_storage/",
+  "log_file": "/opt/conversion/logs/convert_logs.log",
+  "directory": "/storage/",
   "data_format": "%Y-%m-%d %H:%M:%S",
-  "ffmpeg_command": [
+  "ffmpeg_nvidia": [
+    "ffmpeg",
+    "-i", "{input_file}",
+    "-c:v", "h264_nvenc",
+    "-c:a", "aac",
+    "-map", "0:v:0",
+    "-map", "0:a:0",
+    "-b:v", "{b_v}",
+    "-b:a", "{b_a}",
+    "-preset:v", "ultrafast",
+    "-strict", "experimental",
+    "-movflags", "+faststart",
+    "{output_file}"
+  ],
+  "ffmpeg_cpu": [
     "ffmpeg",
     "-i", "{input_file}",
     "-c:v", "libx264",
