@@ -59,7 +59,7 @@ class Get_Info:
             if root[-2:] in ("/A", "/0", "/1", "/2", "/3", "/4", "/5", "/6", "/7", "/8", "/9",
                             "/B", "/C", "/D", "/E", "/F", "/G", "/H", "/I", "/J", "/K",
                             "/L", "/M", "/N", "/O", "/P", "/Q", "/R", "/S", "/T", "/U",
-                            "/V", "/W", "/X", "/Y", "/Z"):
+                            "/V", "/W", "/X", "/Y", "/Z", "/temp"):
                 for file in files:  #iterate through files
                     file_path = os.path.join(root, file)  #create file path
                     video_files.append(file_path)  #add file to list
