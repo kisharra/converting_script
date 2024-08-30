@@ -101,35 +101,36 @@ class Db_querry():
                 except sqlite3.Error as e:
                     logging.error(f'Error creating table ConversionTasks: {e}')
             
-def save_file_data(self, data, streams, is_film, is_serial):
-    """
-    Save file data to the database.
+    def save_file_data(self, data, streams, is_film, is_serial):
+        """
+        Save file data to the database.
 
-    Parameters
-    ----------
-    data : dict
-        Data of the file, returned by ffmpeg.
-    streams : list of dict
-        List of streams of the file.
-    is_film : bool
-        Flag indicating if the file is a film.
-    is_serial : bool
-        Flag indicating if the file is a serial.
-    """
-    with sqlite3.connect(self.db_file) as conn:
-        cur = conn.cursor()
-        cur.execute('SELECT * FROM Files WHERE filename = ?', (data['format']['filename'],))
-        if cur.fetchone() is None:
-            try:
-                cur.execute("""INSERT INTO Files (filename, IsFilm, IsSerial, IsConverted, nb_streams, size, bit_rate, streams)  
-                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-                                (data['format']['filename'], is_film, is_serial, False, data['format']['nb_streams'],
-                                data['format']['size'], data['format']['bit_rate'], json.dumps(streams)))
-                conn.commit()
-            except sqlite3.Error as e:
-                logging.error(f'Error inserting data: {e}')
-        else:
-            print(f"Data already exists for {data['format']['filename']}")
+        Parameters
+        ----------
+        data : dict
+            Data of the file, returned by ffmpeg.
+        streams : list of dict
+            List of streams of the file.
+        is_film : bool
+            Flag indicating if the file is a film.
+        is_serial : bool
+            Flag indicating if the file is a serial.
+        """
+        with sqlite3.connect(self.db_file) as conn:
+            cur = conn.cursor()
+            cur.execute('SELECT * FROM Files WHERE filename = ?', (data['format']['filename'],))
+            if cur.fetchone() is None:
+                try:
+                    cur.execute("""INSERT INTO Files (filename, IsFilm, IsSerial, IsConverted, nb_streams, size, bit_rate, streams)  
+                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                                    (data['format']['filename'], is_film, is_serial, False, data['format']['nb_streams'],
+                                    data['format']['size'], data['format']['bit_rate'], json.dumps(streams)))
+                    conn.commit()
+                except sqlite3.Error as e:
+                    logging.error(f'Error inserting data: {e}')
+            else:
+                print(f"Data already exists for {data['format']['filename']}")
+
     def interrupted_program(self, current_time, file_id):
         """
         Update ConversionTasks table with status 'Error: check logs' and current time if program is interrupted
@@ -141,7 +142,6 @@ def save_file_data(self, data, streams, is_film, is_serial):
         file_id : int
             id of file in database
         """
-        
         
         with sqlite3.connect(self.db_file) as conn:
             cur = conn.cursor()
