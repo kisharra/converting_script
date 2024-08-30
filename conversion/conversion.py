@@ -1,97 +1,71 @@
-import subprocess
-import json
-import os
 from datetime import datetime
+import json
 import logging
+import os
+import shutil
 import signal
+import subprocess
 import sys
+import tempfile
+
+from conversion.get_info import Get_Info
 from conversion.db_querry import Db_querry
 
 
 
-class Get_Info:
-    def __init__(self, config):
-        self.config = config
-        self.db_file = config['db_file']
-        self.ffprobe_command = config['ffprobe_command']
-        self.log_file = config['log_file']
-        logging.basicConfig(filename=self.log_file, level=logging.ERROR, format='%(asctime)s:%(message)s')  #logging to file
-        self.db_querry = Db_querry(config)
-
-    def get_video_info(self, directory):
-        '''get video info in directory'''
-        video_files = []
-        subdirectories = []
-        for root, dirs, files in os.walk(directory):  #iterate through directory
-            if root[-2:] in ("/A", "/0", "/1", "/2", "/3", "/4", "/5", "/6", "/7", "/8", "/9",
-                            "/B", "/C", "/D", "/E", "/F", "/G", "/H", "/I", "/J", "/K",
-                            "/L", "/M", "/N", "/O", "/P", "/Q", "/R", "/S", "/T", "/U",
-                            "/V", "/W", "/X", "/Y", "/Z"):
-                for file in files:  #iterate through files
-                    file_path = os.path.join(root, file)  #create file path
-                    video_files.append(file_path)  #add file to list
-                    video_info = self.run_ffprobe(file_path)  #run ffprobe command
-                    if video_info:  #check if video info is not empty
-                        streams = self.streams_data(video_info)  #transform streams data
-                        self.db_querry.save_films(video_info, streams)  #save data to database
-                                
-                for subdir in dirs:  #iterate through subdirectories
-                    subdir_path = os.path.join(root, subdir)
-                    if os.path.isdir(subdir_path):
-                        for sub_root, sub_dirs, sub_files in os.walk(subdir_path):
-                            for sub_file in sub_files:
-                                sub_file_path = os.path.join(sub_root, sub_file)
-                                video_info = self.run_ffprobe(sub_file_path)
-                                if video_info:
-                                    streams = self.streams_data(video_info)
-                                    self.db_querry.save_serials(video_info, streams)
-
-        return video_files, subdirectories
-
-
-    def run_ffprobe(self, file_path):
-        '''run ffprobe command'''
-        command = [arg.format(file_path=file_path) for arg in self.ffprobe_command]
-        result = subprocess.run(command, capture_output=True, text=True)
-        
-        if result.returncode == 0:
-            return json.loads(result.stdout)
-        else:
-            logging.error(f"Error running ffprobe for {file_path}: {result.stderr}")
-            return 
-
-    def streams_data(self, data):
-        '''transform streams data to get only audio and video streams'''
-        transformed_streams = []
-        for stream in data['streams']:  
-            transformed_stream = {
-                'index': stream['index'],
-                'codec_name': stream['codec_name'],
-                'codec_long_name': stream['codec_long_name'],
-                'codec_type': stream['codec_type'],
-                'disposition': {
-                    'default': stream['disposition']['default']
-                }
-            }
-            if 'tags' in stream:
-                transformed_stream['tags'] = {
-                    'language': stream['tags'].get('language'),
-                    'title': stream['tags'].get('title')
-                }
-            transformed_streams.append(transformed_stream)
-        
-        return transformed_streams
-
 class ConvertTask:
     '''Class for converting videos to mp4 format'''
     def __init__(self, config):
-        '''initialize class variables'''
+        """
+        Initialize class variables
+
+        Parameters
+        ----------
+        config : dict
+            config dictionary
+
+        Attributes
+        ----------
+        config : dict
+            config dictionary
+        db_file : str
+            path to database file
+        maria_db : dict
+            config of maria database
+        log_file : str
+            path to log file
+        data_format : str
+            format of date and time
+        ffmpeg_cpu : list of str
+            list of arguments for ffmpeg command with cpu
+        ffmpeg_nvidia : list of str
+            list of arguments for ffmpeg command with nvidia driver
+        ffmpeg_check_command : list of str
+            list of arguments for ffmpeg command to check integrity of output file
+        bitrate_video_film : str
+            bitrate of video streams of film
+        bitrate_video_serials : str
+            bitrate of video streams of serials
+        b_a : str
+            bitrate of audio streams
+        interrupted : bool
+            flag to check if program is interrupted
+        remove_list : list
+            list of files to remove
+        file_id : int
+            id of current file
+        get_info : Get_Info
+            instance of Get_Info class
+        db_file : Db_querry
+            instance of Db_querry class
+        """
         self.config = config
         self.db_file = config['db_file']
         self.maria_db = config['maria_db']
         self.log_file = config['log_file']
         self.data_format = config['data_format']
-        self.ffmpeg_cpu = config['ffmpeg']
+        self.ffmpeg_cpu = config['ffmpeg_cpu']
+        self.ffmpeg_nvidia = config['ffmpeg_nvidia']
         self.ffmpeg_check_command = config['ffmpeg_check_command']
         self.bitrate_video_film = config['bitrate_video_film']
         self.bitrate_video_serials = config['bitrate_video_serial']
@@ -104,20 +78,39 @@ class ConvertTask:
         logging.basicConfig(filename=self.log_file, level=logging.ERROR, format='%(asctime)s:%(message)s')  #logging to file
     
     def signal_handler(self, signum, frame):
-        '''Signal handler for SIGINT signal'''
+        '''
+        Signal handler for SIGINT signal
+        '''
         logging.error('Program interrupted manually')
         self.interrupted = True
         for file in self.remove_list:  #remove temporary files
-            os.remove(file)
+            if os.path.exists(file):
+                os.remove(file)
         if self.file_id is not None:
             self.db_file.interrupted_program(datetime.now().strftime(self.data_format), self.file_id)
         sys.exit(1)
 
     def run_ffmpeg(self, input_file, output_file, bitrate):
-        '''run ffmpeg command'''
+        '''
+        Run ffmpeg command
+
+        Parameters
+        ----------
+        input_file : str
+            path to input file
+        output_file : str
+            path to output file
+        bitrate : str
+            bitrate of video stream
+
+        Returns
+        -------
+        bool
+            result of conversion
+        '''
         if self.check_nvidia_driver():
             try:
-                command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a) for arg in self.ffmpeg_nvidia]  #run ffmpeg command which is in config
+                command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a) for arg in self.ffmpeg_nvidia]  #run ffmpeg command with nvidia driver which is in config
                 subprocess.run(command, check=True)
                 return True
             except subprocess.CalledProcessError as e:
@@ -125,7 +118,7 @@ class ConvertTask:
                 return False
         else:
             try:
-                command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a) for arg in self.ffmpeg_cpu]  #run ffmpeg command which is in config
+                command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a) for arg in self.ffmpeg_cpu]  #run ffmpeg command with cpu which is in config
                 subprocess.run(command, check=True)
                 return True
             except subprocess.CalledProcessError as e:
@@ -133,7 +126,19 @@ class ConvertTask:
                 return False
 
     def check_integrity(self, output_file):
-        '''check if output file is corrupted'''
+        '''
+        Check if output file is corrupted
+
+        Parameters
+        ----------
+        output_file : str
+            path to output file
+
+        Returns
+        -------
+        tuple
+            (bool, str) where bool is result of check and str is error or 'No errors found'
+        '''
         try:
             result = subprocess.run([arg.format(output_file=output_file) for arg in self.ffmpeg_check_command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
             if result.stderr:
@@ -142,9 +147,42 @@ class ConvertTask:
                 return True, 'No errors found'
         except Exception as e:
             return False, str(e)
+        
+    def check_nvidia_driver(self):
+        '''
+        Check if nvidia driver is installed
+
+        Returns
+        -------
+        bool
+            result of check
+        '''
+        try:
+            result = subprocess.run(['nvidia-smi'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            if result.stderr:
+                return False
+            else:
+                return True
+        except Exception as e:
+            return False
 
     def convert_files(self):
-        '''convert files to mp4 format'''
+
+        '''
+        Convert files to mp4 format
+
+        This function iterate through files in 'Files' table in database,
+        check if file contains more than 2 streams, run ffmpeg command to convert
+        file to mp4 format, check if output file is corrupted and if not, move
+        it to original location, update 'Files' table with new data and remove
+        original file.
+
+        If an error occurs during conversion, log it and update status of
+        checking integrity in 'ConversionTasks' table.
+
+        If conversion is interrupted manually, remove temporary files and update
+        status of conversion in 'ConversionTasks' table.
+        '''
         signal.signal(signal.SIGINT, self.signal_handler)  #register signal handler
 
         video_files = self.db_file.select_data()
@@ -162,38 +200,47 @@ class ConvertTask:
                 if not IsConverted:
 
                     if len(video_streams) > 0 and len(audio_streams) > 0:  #check if file contains video and audio streams
-                        output_file = os.path.splitext(filename)[0] + '.mp4'  #create output file
-                        self.remove_list.append(output_file)  #add file to remove list
+                        # Create a temporary directory
+                        with tempfile.TemporaryDirectory() as temp_dir:
+
+
                             
-                        self.db_file.update_status_of_conversion(file_id, 'converting', datetime.now().strftime(self.data_format))
+                            output_file = os.path.join(temp_dir, os.path.splitext(os.path.basename(filename))[0] + '.mp4')  #create output file path in temp directory
+                            self.remove_list.append(output_file)  #add file to remove list
+                            
+                            self.db_file.update_status_of_conversion(file_id, 'converting', datetime.now().strftime(self.data_format))
 
-                        try:
-                            if IsFilm:  #check if file is a film
-                                bitrate = self.bitrate_video_film  #set bitrate
-                            else:
-                                bitrate = self.bitrate_video_serials
-                            self.run_ffmpeg(filename, output_file, bitrate)  #run ffmpeg
+                            try:
+                                if IsFilm:  #check if file is a film
+                                    bitrate = self.bitrate_video_film  #set bitrate
+                                else:
+                                    bitrate = self.bitrate_video_serials
+                                success = self.run_ffmpeg(filename, output_file, bitrate)  #run ffmpeg
                     
-                            success, check_result = self.check_integrity(output_file)  #check if output file is corrupted
-                            if success:
-                                self.db_file.update_status_ending_conversion('done', datetime.now().strftime(self.data_format), check_result, file_id)
-                                video_info = self.get_info.run_ffprobe(output_file)  #get video info of converted file
-                                if video_info:
-                                    streams = self.get_info.streams_data(video_info)  #get streams info of converted file
-                                    self.db_file.update_files_table(output_file, True, len(streams), video_info['format']['size'], video_info['format']['bit_rate'], json.dumps(streams), file_id)  #update table 'Files' with new data
-                                    self.db_file.update_url_file(filename, output_file)  #update table 'Video_Series_Files' on Stalker Portal with new url
-                                # os.remove(filename)  #remove original file
-                            else:
-                                logging.error(f'{filename}: {check_result}')
-                                self.db_file. update_of_checking_integrity('Error', datetime.now().strftime(self.data_format), 'Error: check logs', file_id)  #update status of checking
+                                if success:
+                                    success, check_result = self.check_integrity(output_file)  #check if output file is corrupted
+                                    if success:
+                                        final_path = os.path.join(os.path.dirname(filename), os.path.basename(output_file))  #path to move final file
+                                        shutil.move(output_file, final_path)  #move file to original location
 
-                                # os.remove(output_file)
+                                        self.db_file.update_status_ending_conversion('done', datetime.now().strftime(self.data_format), check_result, file_id)
+                                        video_info = self.get_info.run_ffprobe(final_path)  #get video info of converted file
+                                        if video_info:
+                                            streams = self.get_info.streams_data(video_info)  #get streams info of converted file
+                                            self.db_file.update_files_table(final_path, True, len(streams), video_info['format']['size'], video_info['format']['bit_rate'], json.dumps(streams), file_id)  #update table 'Files' with new data
+                                            # self.db_file.update_url_file(filename, final_path)  #update table 'Video_Series_Files' on Stalker Portal with new url
 
-                        except Exception as e:  #catch errors
-                            error_messege = str(e)
-                            logging.error(f'{filename}: {error_messege}')  #logging errors
+                                        # Remove original file
+                                        # os.remove(filename)
+                                    else:
+                                        logging.error(f'{filename}: {check_result}')
+                                        self.db_file.update_of_checking_integrity('Error', datetime.now().strftime(self.data_format), 'Error: check logs', file_id)  #update status of checking
 
-                            # os.remove(output_file)  #remove temporary file
+                            except Exception as e:  #catch errors
+                                error_message = str(e)
+                                logging.error(f'{filename}: {error_message}')  #logging errors
+
+                                # os.remove(output_file)  #remove temporary file if an error occurs
 
 if __name__ == '__main__':
     pass
