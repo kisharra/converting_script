@@ -1,5 +1,5 @@
 {
-  "db_file": "/opt/conversion/settings/film_storage.db",
+  "db_file": "settings/film_storage.db",
   "maria_db": {
     "host": "172.28.1.240",
     "port": 3306,
@@ -7,7 +7,7 @@
     "password": "${DB_PASSWORD}",
     "database": "stalker_db"
   },
-  "log_file": "/opt/conversion/logs/convert_logs.log",
+  "log_file": "logs/convert_logs.log",
   "directory": "/storage/temp/",
   "data_format": "%Y-%m-%d %H:%M:%S",
   "ffmpeg_nvidia": [
