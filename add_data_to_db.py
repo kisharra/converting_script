@@ -4,7 +4,7 @@ import json
 
 
 def load_config(config_file):
-    with open ('config.json', 'r') as config_file:  #read config file
+    with open ('settings/config.json', 'r') as config_file:  #read config file
         config = json.load(config_file)
     return config
 
