@@ -1,36 +1,25 @@
 {
-  "db_file": "settings/film_storage.db",
+  "sqlite3": "settings/film_storage.db",
   "maria_db": {
     "host": "172.28.1.240",
     "port": 3306,
-    "user": "stalker2",
+    "user": "turbo",
     "password": "${DB_PASSWORD}",
     "database": "stalker_db"
   },
+  "path_to_main": "/opt/conversion",
   "log_file": "logs/convert_logs.log",
-  "directory": "/storage/temp/",
+  "directory": "/storage",
+  "temp_directory": "/opt/conversion/temp",
   "data_format": "%Y-%m-%d %H:%M:%S",
-  "ffmpeg_nvidia": [
-    "ffmpeg",
-    "-i", "{input_file}",
-    "-c:v", "h264_nvenc",
-    "-c:a", "aac",
-    "-map", "0:v:0",
-    "-map", "0:a:0",
-    "-b:v", "{b_v}",
-    "-b:a", "{b_a}",
-    "-preset:v", "ultrafast",
-    "-strict", "experimental",
-    "-movflags", "+faststart",
-    "{output_file}"
-  ],
   "ffmpeg_cpu": [
     "ffmpeg",
     "-i", "{input_file}",
     "-c:v", "libx264",
     "-c:a", "ac3",
-    "-map", "0:v:0",
-    "-map", "0:a:0",
+    "-filter:a", "volume=2.0",
+    "-map", "0:0",
+    "-map", "0:{audio_stream_index}",
     "-b:v", "{b_v}",
     "-b:a", "{b_a}",
     "-preset:v", "ultrafast",
@@ -45,8 +34,8 @@
     "-f", "null",
     "-"
   ],
-  "bitrate_video_film": "4096k",
-  "bitrate_video_serial": "2048k",
+  "bitrate_video_film": "5120k",
+  "bitrate_video_serial": "4096k",
   "bitrate_audio": "192k",
   "ffprobe_command": [
       "ffprobe", "-v", "quiet", "-print_format", "json", "-show_format", "-show_streams", "{file_path}"

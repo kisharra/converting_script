@@ -1,0 +1,6 @@
+2024-09-16 11:19:06,535 - ERROR - /storage/B/1991.Boyz.N.The.Hood.mkv: 'int' object is not subscriptable
+2024-09-16 12:29:15,549 - INFO - /storage/B/1991.Boyz.N.The.Hood.mkv converted, new url: /storage/B/1991.Boyz.N.The.Hood.mp4
+2024-09-16 12:38:38,686 - ERROR - Error running ffprobe for /storage/A/Avatar.2009.BDRip.1080p.Rus.Eng.mk: 
+2024-09-16 12:38:38,686 - WARNING - No video info for file: /storage/A/Avatar.2009.BDRip.1080p.Rus.Eng.mk
+2024-09-16 12:56:46,640 - INFO - /storage/A/Avatar.2009.BDRip.1080p.Rus.Eng.mkv converted, new url: /storage/A/Avatar.2009.BDRip.1080p.Rus.Eng.mp4
+2024-09-16 14:34:32,470 - INFO - /storage/A/Avatar.2009.BDRip.1080p.Rus.Eng.mkv converted, new url: /storage/A/Avatar.2009.BDRip.1080p.Rus.Eng.mp4

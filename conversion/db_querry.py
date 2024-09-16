@@ -1,3 +1,4 @@
+import os
 import sqlite3
 import mariadb
 import logging
@@ -25,9 +26,9 @@ class Db_querry():
             path to log file
         """
         self.config = config
-        self.db_file = config['db_file']
+        self.db_file = os.path.join(config['path_to_main'], config['sqlite3'])
         self.maria_db = config['maria_db']
-        self.log_file = config['log_file']
+        self.log_file = os.path.join(config['path_to_main'], config['log_file'])
         logging.basicConfig(filename=self.log_file, level=logging.ERROR, format='%(asctime)s:%(message)s')
 
     def table_exists(self, table_name):
@@ -257,13 +258,31 @@ class Db_querry():
         output_file : str
             new filename
         """
-        with mariadb.connect(self.maria_db) as conn:
+        with mariadb.connect(
+            host = self.config['maria_db']['host'],
+            user = self.config['maria_db']['user'],
+            password = self.config['maria_db']['password'],
+            database = self.config['maria_db']['database'],
+            port = self.config['maria_db']['port']
+        ) as conn:
             cur = conn.cursor()
             cur.execute(
             'UPDATE video_series_files SET url = REPLACE(url, ?, ?) WHERE url LIKE ?',
             (filename, output_file, '%' + filename)
         )
             conn.commit()  
+
+    def test_request(self, filename):
+            with mariadb.connect(
+                host = self.config['maria_db']['host'],
+                user = self.config['maria_db']['user'],
+                password = self.config['maria_db']['password'],
+                database = self.config['maria_db']['database'],
+                port = self.config['maria_db']['port']
+            ) as conn:
+                cur = conn.cursor()
+                cur.execute('SELECT * FROM video_series_files WHERE url LIKE ?', ('%'+filename+'%',))
+                return cur.fetchall()
     
 
 if __name__ == '__main__':
