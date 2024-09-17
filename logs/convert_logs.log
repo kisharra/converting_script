@@ -1,15 +1,15 @@
-2024-09-16 11:19:06,535 - ERROR - /storage/B/1991.Boyz.N.The.Hood.mkv: 'int' object is not subscriptable
-2024-09-16 12:29:15,549 - INFO - /storage/B/1991.Boyz.N.The.Hood.mkv converted, new url: /storage/B/1991.Boyz.N.The.Hood.mp4
-2024-09-16 12:38:38,686 - ERROR - Error running ffprobe for /storage/A/Avatar.2009.BDRip.1080p.Rus.Eng.mk: 
-2024-09-16 12:38:38,686 - WARNING - No video info for file: /storage/A/Avatar.2009.BDRip.1080p.Rus.Eng.mk
-2024-09-16 12:56:46,640 - INFO - /storage/A/Avatar.2009.BDRip.1080p.Rus.Eng.mkv converted, new url: /storage/A/Avatar.2009.BDRip.1080p.Rus.Eng.mp4
-2024-09-16 14:34:32,470 - INFO - /storage/A/Avatar.2009.BDRip.1080p.Rus.Eng.mkv converted, new url: /storage/A/Avatar.2009.BDRip.1080p.Rus.Eng.mp4
-2024-09-16 15:27:44,923 - ERROR - Error running ffprobe for asdf: 
-2024-09-16 15:27:44,924 - WARNING - No video info for file: asdf
-2024-09-16 15:38:36,495:Error: File not found.. Try again.
-2024-09-16 15:40:11,074:Error: File not found.. Try again.
-2024-09-16 15:41:09,637:File not found.
-2024-09-16 15:41:53,662:Error: File not found.
-2024-09-16 15:43:15,149:Error: File not found.
-2024-09-16 15:43:24,021:Attempt to enter file adfg failed. Error: File not found.
-2024-09-16 15:43:59,348:Attempt to enter file adfg failed. Error: File not found.
+2024-09-17 11:19:20,859 - ERROR - Error running ffprobe for /storage/M/Magicians/3/The.Magicians.S03E04.1080p.rus.LostFilm.TV.mp4: 
+2024-09-17 11:21:07,803 - ERROR - Error running ffprobe for /storage/S/Sleuth.2007.x264.BDRip.1080p.mkv: 
+2024-09-17 11:25:53,324 - ERROR - Error running ffprobe for /storage/Y/Years.and.Years/s01/S01E06.mp4: 
+2024-09-17 11:26:01,999 - ERROR - Error running ffprobe for /storage/1/13.Reasons.Why/s02/13.Reasons.Why.S02E06.WEB-DL.1080p.-Kyle.mp4: 
+2024-09-17 11:27:11,498 - ERROR - Error running ffprobe for /storage/C/Chilling.Adventures.of.Sabrina/4/Chilling.Adventures.Of.Sabrina.S04E05.WEB-DL.1080p.RGzsRutracker.mp4: 
+2024-09-17 11:27:13,099 - ERROR - Error running ffprobe for /storage/C/Chilling.Adventures.of.Sabrina/1/Chilling.Adventures.of.Sabrina.S01E02.WEB-DL.1080p.Rus.Eng.mp4: 
+2024-09-17 11:44:17,680 - ERROR - Error running ffprobe for /storage/A/The.Umbrella.Academy/s03/S03E10.mp4: 
+2024-09-17 11:44:37,736 - ERROR - Error running ffprobe for /storage/A/Amazing.Stories/1/Amazing.Stories.S01E04.1080p.TVShows.mp4: 
+2024-09-17 11:44:48,565 - ERROR - Error running ffprobe for /storage/A/Anna/s03/S03E09.mp4: 
+2024-09-17 11:44:49,274 - ERROR - Error running ffprobe for /storage/A/Anna/s03/S03E10.mp4: 
+2024-09-17 11:45:11,124 - ERROR - Error running ffprobe for /storage/A/The.Adventures.of.Puss.in.Boots/s05/S05E06.mp4: 
+2024-09-17 11:49:39,353 - ERROR - Error running ffprobe for /storage/H/Homeland/1/Homeland.S01E09.HD.rus.LostFilm.TV.mp4:
+
+2024-09-17 16:03:44,035:ffprobe failed with file /storage/M/Magicians/3/The.Magicians.S03E04.1080p.rus.LostFilm.TV.mp4: empty output
+2024-09-17 16:04:53,342:ERROR - ffprobe failed with file /storage/M/Magicians/3/The.Magicians.S03E04.1080p.rus.LostFilm.TV.mp4: empty output

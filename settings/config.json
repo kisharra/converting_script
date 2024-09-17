@@ -10,7 +10,6 @@
   "path_to_main": "/opt/conversion",
   "log_file": "logs/convert_logs.log",
   "directory": "/storage",
-  "temp_directory": "/opt/conversion/temp",
   "data_format": "%Y-%m-%d %H:%M:%S",
   "ffmpeg_cpu": [
     "ffmpeg",

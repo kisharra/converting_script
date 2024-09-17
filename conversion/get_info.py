@@ -123,10 +123,13 @@ class Get_Info:
             try:
                 return json.loads(result.stdout)
             except json.JSONDecodeError:
-                logging.error(f"Error decoding JSON for {file_path}: {result.stdout}")
+                logging.error(f"ERROR - decoding JSON failed with file {file_path}: {result.stdout}")
                 return None
+        elif not json.loads(result.stdout):
+            logging.error(f"ERROR - ffprobe failed with file {file_path}: Empty output")
         else:
-            logging.error(f"Error running ffprobe for {file_path}: {result.stderr}")
+            logging.error(f"ERROR - ffprobe failed with file {file_path}: {result.stderr}")
+            print(result.stderr)
             return None
 
     def streams_data(self, data):
@@ -147,8 +150,6 @@ class Get_Info:
         for stream in data.get('streams', []):
             transformed_stream = {
                 'index': stream['index'],
-                'codec_name': stream['codec_name'],
-                'codec_long_name': stream['codec_long_name'],
                 'codec_type': stream['codec_type'],
                 'disposition': {
                     'default': stream['disposition']['default']

@@ -120,13 +120,22 @@ class Db_querry():
         with sqlite3.connect(self.db_file) as conn:
             cur = conn.cursor()
             cur.execute('SELECT * FROM Files WHERE filename = ?', (data['format']['filename'],))
+            
             if cur.fetchone() is None:
                 try:
-                    cur.execute("""INSERT INTO Files (filename, IsFilm, IsSerial, IsConverted, nb_streams, size, bit_rate, streams)  
-                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-                                    (data['format']['filename'], is_film, is_serial, False, data['format']['nb_streams'],
-                                    data['format']['size'], data['format']['bit_rate'], json.dumps(streams)))
-                    conn.commit()
+                    filename = data['format'].get('filename')
+                    nb_streams = data['format'].get('nb_streams')
+                    size = data['format'].get('size')
+                    bit_rate = data['format'].get('bit_rate')  
+
+                    if filename:
+                        cur.execute("""INSERT INTO Files (filename, IsFilm, IsSerial, IsConverted, nb_streams, size, bit_rate, streams)  
+                                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                                        (filename, is_film, is_serial, False, nb_streams, size, bit_rate, json.dumps(streams)))
+                        conn.commit()
+                    else:
+                        logging.error("Filename is missing in the data.")
+                
                 except sqlite3.Error as e:
                     logging.error(f'Error inserting data: {e}')
             else:

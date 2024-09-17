@@ -9,8 +9,8 @@ import json
 def load_config():
     with open (os.path.join('/opt/conversion/settings', 'config.json'), 'r') as config_file:
         config = json.load(config_file)
-
         return config
+    
 logging.basicConfig(filename=os.path.join('/opt/conversion/logs', 'convert_logs.log'), level=logging.ERROR, format='%(asctime)s:%(message)s')
 
 def get_user_inputs():
@@ -48,5 +48,8 @@ get_info = Get_Info(load_config())
 file_path, bool_value_1, bool_value_2 = get_user_inputs()
 
 get_info.get_single_file_info(file_path, bool_value_1, bool_value_2)
+
+# get_info = Get_Info(load_config())
+# get_info.get_all_files_info(load_config()['directory'])
 
 
