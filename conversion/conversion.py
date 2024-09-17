@@ -65,11 +65,11 @@ class ConvertTask:
         self.log_file = os.path.join(config['path_to_main'], config['log_file'])
         self.data_format = config['data_format']
         self.ffmpeg_cpu = config['ffmpeg_cpu']
-        # self.ffmpeg_nvidia = config['ffmpeg_nvidia']
         self.ffmpeg_check_command = config['ffmpeg_check_command']
         self.bitrate_video_film = config['bitrate_video_film']
         self.bitrate_video_serials = config['bitrate_video_serial']
         self.b_a = config['bitrate_audio']
+        self.tmp_dir = os.path.join(config['path_to_main'], config['temp_dir'])
         self.interrupted = False
         self.remove_list = []
         self.file_id = None
@@ -108,15 +108,6 @@ class ConvertTask:
         bool
             result of conversion
         '''
-        # if self.check_nvidia_driver():
-        #     try:
-        #         command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a) for arg in self.ffmpeg_nvidia]  #run ffmpeg command with nvidia driver which is in config
-        #         subprocess.run(command, check=True)
-        #         return True
-        #     except subprocess.CalledProcessError as e:
-        #         logging.error(f"Error running ffmpeg: {e}")
-        #         return False
-        # else:
         try:
             command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a, audio_stream_index=audio_stream_index) for arg in self.ffmpeg_cpu]  #run ffmpeg command with cpu which is in config
             subprocess.run(command, check=True)
@@ -220,8 +211,9 @@ class ConvertTask:
                 
                 if not IsConverted:
 
-                    # Create a temporary directory
-                    with tempfile.TemporaryDirectory() as temp_dir:
+                    os.makedirs(self.tmp_dir, exist_ok=True) # create temporary directory
+
+                    with tempfile.TemporaryDirectory(dir=self.tmp_dir) as temp_dir:
                         
                         output_file = os.path.join(temp_dir, os.path.splitext(os.path.basename(filename))[0] + '.mp4')  #create output file path in temp directory
                         self.remove_list.append(output_file)  #add file to remove list
@@ -246,8 +238,8 @@ class ConvertTask:
                                     if video_info:
                                         streams = self.get_info.streams_data(video_info)  #get streams info of converted file
                                         self.db_file.update_files_table(final_path, True, len(streams), video_info['format']['size'], video_info['format']['bit_rate'], json.dumps(streams), file_id)  #update table 'Files' with new data
-                                        self.db_file.update_url_file(filename, final_path)  #update table 'Video_Series_Files' on Stalker Portal with new url
-                                    # os.remove(filename) # remove original file
+                                        # self.db_file.update_url_file(filename, final_path)  #update table 'Video_Series_Files' on Stalker Portal with new url
+                                    os.remove(filename) # remove original file
                                 else:
                                     logging.error(f'{filename}: {check_result}')
                                     self.db_file.update_of_checking_integrity('Error', datetime.now().strftime(self.data_format), 'Error: check logs', file_id)  #update status of checking

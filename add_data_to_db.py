@@ -5,7 +5,6 @@ import json
 
 
 
-
 def load_config():
     with open (os.path.join('/opt/conversion/settings', 'config.json'), 'r') as config_file:
         config = json.load(config_file)
@@ -39,8 +38,7 @@ def get_user_inputs():
             return file_path, bool_value_1, bool_value_2
 
         except ValueError as e:
-            logging.error(f"Attempt to enter file {file_path} failed. Error: {e}")
-            # print(f"Error: {e}. Try again.")
+            logging.error(f" Attempt to enter file {file_path} failed. Error: {e}")
             print(f"Attempt to enter file {file_path} failed. Error: {e}")
 
 get_info = Get_Info(load_config())

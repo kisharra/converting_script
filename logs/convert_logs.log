@@ -13,3 +13,6 @@
 
 2024-09-17 16:03:44,035:ffprobe failed with file /storage/M/Magicians/3/The.Magicians.S03E04.1080p.rus.LostFilm.TV.mp4: empty output
 2024-09-17 16:04:53,342:ERROR - ffprobe failed with file /storage/M/Magicians/3/The.Magicians.S03E04.1080p.rus.LostFilm.TV.mp4: empty output
+2024-09-17 17:12:42,832 - INFO - /storage/temp/The.Last.Kingdom.Seven.Kings.Must.Die.2023.1080p.BluRay.DD.5.1.x264-MegaPeer.mkv converted, new url: /storage/temp/The.Last.Kingdom.Seven.Kings.Must.Die.2023.1080p.BluRay.DD.5.1.x264-MegaPeer.mp4
+2024-09-17 17:16:55,009:Attempt to enter file /storage/temp/The.Last.Kingdom.Seven.Kings.Must.Die.2023.1080p.BluRay.DD.5.1.x264-MegaPeer.mkv failed. Error: File not found.
+2024-09-18 09:11:16,035 - INFO - /storage/temp/The.Last.Kingdom.Seven.Kings.Must.Die.2023.1080p.BluRay.DD.5.1.x264-MegaPeer.mkv converted, new url: /storage/temp/The.Last.Kingdom.Seven.Kings.Must.Die.2023.1080p.BluRay.DD.5.1.x264-MegaPeer.mp4

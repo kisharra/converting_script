@@ -1,5 +1,5 @@
 {
-  "sqlite3": "settings/film_storage.db",
+  "sqlite3": "settings/test.db",
   "maria_db": {
     "host": "172.28.1.240",
     "port": 3306,
@@ -10,6 +10,7 @@
   "path_to_main": "/opt/conversion",
   "log_file": "logs/convert_logs.log",
   "directory": "/storage",
+  "temp_dir": "/opt/conversion/temp",
   "data_format": "%Y-%m-%d %H:%M:%S",
   "ffmpeg_cpu": [
     "ffmpeg",
