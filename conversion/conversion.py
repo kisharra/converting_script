@@ -1,6 +1,7 @@
 from datetime import datetime
 import json
 import logging
+from multiprocessing import Pool
 import os
 import shutil
 import signal
@@ -83,9 +84,11 @@ class ConvertTask:
         '''
         logging.error('Program interrupted manually')
         self.interrupted = True
-        for file in self.remove_list:  #remove temporary files
-            if os.path.exists(file):
-                os.remove(file)
+        # for file in self.remove_list:  #remove temporary files
+        #     if os.path.exists(file):
+        #         os.remove(file)
+        shutil.rmtree(self.tmp_dir)
+        os.mkdir(self.tmp_dir)
         if self.file_id is not None:
             self.db_file.interrupted_program(datetime.now().strftime(self.data_format), self.file_id)
         sys.exit(1)
@@ -157,7 +160,7 @@ class ConvertTask:
         except Exception as e:
             return False
 
-    def convert_files(self):
+    def convert_files(self, file_data):
 
         '''
         Convert files to mp4 format
@@ -176,77 +179,87 @@ class ConvertTask:
         '''
         signal.signal(signal.SIGINT, self.signal_handler)  #register signal handler
 
-        video_files = self.db_file.select_data()
+        # # video_files = self.db_file.select_data()
 
-        for file_id, IsFilm, IsConverted, filename, nb_streams, streams in video_files:  #iterate through files
-            self.file_id = file_id
-            if self.interrupted:
-                break
-                
-            if nb_streams > 2:  #check if file contains more than 2 streams
-                streams_info = json.loads(streams)
+        # for file_id, IsFilm, IsConverted, filename, nb_streams, streams in video_files:  #iterate through files
+            # self.file_id = file_id
+            # if self.interrupted:
+            #     break
+        file_id, IsFilm, IsConverted, filename, nb_streams, streams = file_data
 
-                default_rus_index = None
-                first_rus_index = None
+        if nb_streams > 2:  #check if file contains more than 2 streams
+            streams_info = json.loads(streams)
 
-                # iterate through streams and find default=1 track
-                for stream in streams_info:
-                    if stream['codec_type'] == 'audio':
-                        language = stream.get('tags', {}).get('language', '')
-                        is_default = stream.get('disposition', {}).get('default', 0)
+            default_rus_index = None
+            first_rus_index = None
 
-                        if language == 'rus':
-                            if is_default == 1:
-                                default_rus_index = stream['index']
-                            if first_rus_index is None:
-                                first_rus_index = stream['index']
+            # iterate through streams and find default=1 track
+            for stream in streams_info:
+                if stream['codec_type'] == 'audio':
+                    language = stream.get('tags', {}).get('language', '')
+                    is_default = stream.get('disposition', {}).get('default', 0)
 
-                # Priority - track with default=1, if default=1 not found
-                if default_rus_index is not None:
-                    selected_index = default_rus_index
-                elif first_rus_index is not None:
-                    selected_index = first_rus_index
-                else:
-                    selected_index = None
-                
-                if not IsConverted:
+                    if language == 'rus':
+                        if is_default == 1:
+                            default_rus_index = stream['index']
+                        if first_rus_index is None:
+                            first_rus_index = stream['index']
 
-                    os.makedirs(self.tmp_dir, exist_ok=True) # create temporary directory
+            # Priority - track with default=1, if default=1 not found
+            if default_rus_index is not None:
+                selected_index = default_rus_index
+            elif first_rus_index is not None:
+                selected_index = first_rus_index
+            else:
+                selected_index = None
+            
+            if not IsConverted:
 
-                    with tempfile.TemporaryDirectory(dir=self.tmp_dir) as temp_dir:
-                        
-                        output_file = os.path.join(temp_dir, os.path.splitext(os.path.basename(filename))[0] + '.mp4')  #create output file path in temp directory
-                        self.remove_list.append(output_file)  #add file to remove list
-                        
-                        self.db_file.update_status_of_conversion(file_id, 'converting', datetime.now().strftime(self.data_format))
+                os.makedirs(self.tmp_dir, exist_ok=True) # create temporary directory
 
-                        try:
-                            if IsFilm:  #check if file is a film
-                                bitrate = self.bitrate_video_film  #set bitrate
-                            else:
-                                bitrate = self.bitrate_video_serials
-                            success = self.run_ffmpeg(filename, output_file, bitrate, selected_index)  #run ffmpeg
-                
+                with tempfile.TemporaryDirectory(dir=self.tmp_dir) as temp_dir:
+                    
+                    output_file = os.path.join(temp_dir, os.path.splitext(os.path.basename(filename))[0] + '.mp4')  #create output file path in temp directory
+                    # self.remove_list.append(output_file)  #add file to remove list
+                    
+                    self.db_file.update_status_of_conversion(file_id, 'converting', datetime.now().strftime(self.data_format))
+
+                    try:
+                        if IsFilm:  #check if file is a film
+                            bitrate = self.bitrate_video_film  #set bitrate
+                        else:
+                            bitrate = self.bitrate_video_serials
+                        success = self.run_ffmpeg(filename, output_file, bitrate, selected_index)  #run ffmpeg
+            
+                        if success:
+                            success, check_result = self.check_integrity(output_file)  #check if output file is corrupted
                             if success:
-                                success, check_result = self.check_integrity(output_file)  #check if output file is corrupted
-                                if success:
-                                    final_path = os.path.join(os.path.dirname(filename), os.path.basename(output_file))  #path to move final file
-                                    shutil.move(output_file, final_path)  #move file to original location
-                                    self.db_file.update_status_ending_conversion('done', datetime.now().strftime(self.data_format), check_result, file_id)
-                                    video_info = self.get_info.run_ffprobe(final_path)  #get video info of converted file
-                                    logging.info(f'{filename} converted, new url: {final_path}')  #logging success
-                                    if video_info:
-                                        streams = self.get_info.streams_data(video_info)  #get streams info of converted file
-                                        self.db_file.update_files_table(final_path, True, len(streams), video_info['format']['size'], video_info['format']['bit_rate'], json.dumps(streams), file_id)  #update table 'Files' with new data
-                                        # self.db_file.update_url_file(filename, final_path)  #update table 'Video_Series_Files' on Stalker Portal with new url
-                                    os.remove(filename) # remove original file
-                                else:
-                                    logging.error(f'{filename}: {check_result}')
-                                    self.db_file.update_of_checking_integrity('Error', datetime.now().strftime(self.data_format), 'Error: check logs', file_id)  #update status of checking
+                                final_path = os.path.join(os.path.dirname(filename), os.path.basename(output_file))  #path to move final file
+                                shutil.move(output_file, final_path)  #move file to original location
+                                self.db_file.update_status_ending_conversion('done', datetime.now().strftime(self.data_format), check_result, file_id)
+                                video_info = self.get_info.run_ffprobe(final_path)  #get video info of converted file
+                                logging.info(f'{filename} converted, new url: {final_path}')  #logging success
+                                if video_info:
+                                    streams = self.get_info.streams_data(video_info)  #get streams info of converted file
+                                    self.db_file.update_files_table(final_path, True, len(streams), video_info['format']['size'], video_info['format']['bit_rate'], json.dumps(streams), file_id)  #update table 'Files' with new data
+                                    self.db_file.update_url_file(filename, final_path)  #update table 'Video_Series_Files' on Stalker Portal with new url
+                                os.remove(filename) # remove original file
+                            else:
+                                logging.error(f'{filename}: {check_result}')
+                                self.db_file.update_of_checking_integrity('Error', datetime.now().strftime(self.data_format), 'Error: check logs', file_id)  #update status of checking
 
-                        except Exception as e:  #catch errors
-                            error_message = str(e)
-                            logging.error(f'{filename}: {error_message}')  #logging errors
+                    except Exception as e:  #catch errors
+                        error_message = str(e)
+                        logging.error(f'{filename}: {error_message}')  #logging errors
+
+    def parallel_convert(self):
+        signal.signal(signal.SIGINT, self.signal_handler)
+        video_files = self.db_file.select_data()
+        with Pool(processes=2) as pool:
+            pool.map(self.convert_files, video_files)
+
+    
+
 
 if __name__ == '__main__':
     pass

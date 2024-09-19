@@ -171,6 +171,12 @@ class Db_querry():
             cur = conn.cursor()
             cur.execute('SELECT id, IsFilm, IsConverted, filename, nb_streams, streams FROM Files')  #select data from database
             return cur.fetchall()
+        
+    def select_single_data(self, filename):
+            with sqlite3.connect(self.db_file) as conn:
+                cur = conn.cursor()
+                cur.execute('SELECT id, IsFilm, IsConverted, filename, nb_streams, streams FROM Files WHERE filename=?', (filename,))  #select data from database
+                return cur.fetchall()
     
     def update_status_of_conversion(self, file_id, status, current_time):
         """

@@ -10,9 +10,56 @@
 2024-09-17 11:44:49,274 - ERROR - Error running ffprobe for /storage/A/Anna/s03/S03E10.mp4: 
 2024-09-17 11:45:11,124 - ERROR - Error running ffprobe for /storage/A/The.Adventures.of.Puss.in.Boots/s05/S05E06.mp4: 
 2024-09-17 11:49:39,353 - ERROR - Error running ffprobe for /storage/H/Homeland/1/Homeland.S01E09.HD.rus.LostFilm.TV.mp4:
-
-2024-09-17 16:03:44,035:ffprobe failed with file /storage/M/Magicians/3/The.Magicians.S03E04.1080p.rus.LostFilm.TV.mp4: empty output
-2024-09-17 16:04:53,342:ERROR - ffprobe failed with file /storage/M/Magicians/3/The.Magicians.S03E04.1080p.rus.LostFilm.TV.mp4: empty output
-2024-09-17 17:12:42,832 - INFO - /storage/temp/The.Last.Kingdom.Seven.Kings.Must.Die.2023.1080p.BluRay.DD.5.1.x264-MegaPeer.mkv converted, new url: /storage/temp/The.Last.Kingdom.Seven.Kings.Must.Die.2023.1080p.BluRay.DD.5.1.x264-MegaPeer.mp4
-2024-09-17 17:16:55,009:Attempt to enter file /storage/temp/The.Last.Kingdom.Seven.Kings.Must.Die.2023.1080p.BluRay.DD.5.1.x264-MegaPeer.mkv failed. Error: File not found.
-2024-09-18 09:11:16,035 - INFO - /storage/temp/The.Last.Kingdom.Seven.Kings.Must.Die.2023.1080p.BluRay.DD.5.1.x264-MegaPeer.mkv converted, new url: /storage/temp/The.Last.Kingdom.Seven.Kings.Must.Die.2023.1080p.BluRay.DD.5.1.x264-MegaPeer.mp4
+2024-09-18 09:23:12,473 - INFO - /storage/2/200.Pounds.Beauty.2006_HDTVrip.720p_DTS.Rus.Kor-sub.mkv converted, new url: /storage/2/200.Pounds.Beauty.2006_HDTVrip.720p_DTS.Rus.Kor-sub.mp4
+2024-09-18 09:56:04,753 - INFO - /storage/2/200.Degrees.2017.1080p.WEB-DL.H264.mkv converted, new url: /storage/2/200.Degrees.2017.1080p.WEB-DL.H264.mp4
+2024-09-18 10:03:13,566 - INFO - /storage/2/2036.Origin.Unknown.2018.AMZN.WEB-DL.1080p.ExKinoRay.mkv converted, new url: /storage/2/2036.Origin.Unknown.2018.AMZN.WEB-DL.1080p.ExKinoRay.mp4
+2024-09-19 09:18:14,144 - INFO - /storage/M/mishki_gummi/57_brat_tolstun.mkv converted, new url: /storage/M/mishki_gummi/57_brat_tolstun.mp4
+2024-09-19 09:23:02,465 - INFO - /storage/M/mishki_gummi/54_koroleva_garpii.mkv converted, new url: /storage/M/mishki_gummi/54_koroleva_garpii.mp4
+2024-09-19 09:23:56,508 - INFO - /storage/M/mishki_gummi/38_bolshoi_obman.mkv converted, new url: /storage/M/mishki_gummi/38_bolshoi_obman.mp4
+2024-09-19 09:24:52,160 - INFO - /storage/M/mishki_gummi/02_skulptor_zlodey.mkv converted, new url: /storage/M/mishki_gummi/02_skulptor_zlodey.mp4
+2024-09-19 09:25:48,389 - INFO - /storage/M/mishki_gummi/22_slishkom_mnogo_konfet.mkv converted, new url: /storage/M/mishki_gummi/22_slishkom_mnogo_konfet.mp4
+2024-09-19 09:27:58,998 - INFO - /storage/M/mishki_gummi/59_pomeniatcia_licami.mkv converted, new url: /storage/M/mishki_gummi/59_pomeniatcia_licami.mp4
+2024-09-19 09:28:51,826 - INFO - /storage/M/mishki_gummi/03_sled_drakona.mkv converted, new url: /storage/M/mishki_gummi/03_sled_drakona.mp4
+2024-09-19 09:30:21,038 - INFO - /storage/M/mishki_gummi/63_obmriad.mkv converted, new url: /storage/M/mishki_gummi/63_obmriad.mp4
+2024-09-19 09:30:47,197 - INFO - /storage/8/8.Mile.2002.1080p.mp4 converted, new url: /storage/8/8.Mile.2002.1080p.mp4
+2024-09-19 09:31:41,580 - INFO - /storage/M/mishki_gummi/25_puteshestvie_v_zubastii_les.mkv converted, new url: /storage/M/mishki_gummi/25_puteshestvie_v_zubastii_les.mp4
+2024-09-19 09:38:47,262 - INFO - /storage/T/Tayna.Krasnoy.Planety.2011.DUAL.BDRip.1080p.mkv converted, new url: /storage/T/Tayna.Krasnoy.Planety.2011.DUAL.BDRip.1080p.mp4
+2024-09-19 09:40:46,253 - INFO - /storage/G/Galaxy.Quest.1999.x264.BDRip.1080p.mkv converted, new url: /storage/G/Galaxy.Quest.1999.x264.BDRip.1080p.mp4
+2024-09-19 09:44:48,303 - INFO - /storage/T/topkat.2011.mkv converted, new url: /storage/T/topkat.2011.mp4
+2024-09-19 09:50:07,510 - INFO - /storage/G/The.Cold.Light.of.Day.2012.1080p.mp4 converted, new url: /storage/G/The.Cold.Light.of.Day.2012.1080p.mp4
+2024-09-19 09:58:12,385 - INFO - /storage/T/Tron.Legacy.2010.Blu-ray.1080p.x264-EbP.Rus.Ukr.Eng.mkv converted, new url: /storage/T/Tron.Legacy.2010.Blu-ray.1080p.x264-EbP.Rus.Ukr.Eng.mp4
+2024-09-19 09:58:45,081 - INFO - /storage/G/Golay_pravda_2009_1080p.mkv converted, new url: /storage/G/Golay_pravda_2009_1080p.mp4
+2024-09-19 10:09:47,631 - INFO - /storage/G/Greenland.2020.1080p.mp4 converted, new url: /storage/G/Greenland.2020.1080p.mp4
+2024-09-19 10:10:31,535 - INFO - /storage/T/Triple.Frontier.2019.1080p.WEBRip.DD5.1.x264.mkv converted, new url: /storage/T/Triple.Frontier.2019.1080p.WEBRip.DD5.1.x264.mp4
+2024-09-19 10:17:41,544 - INFO - /storage/T/Trash.Fire.2016.1080p.mkv converted, new url: /storage/T/Trash.Fire.2016.1080p.mp4
+2024-09-19 10:25:11,234 - INFO - /storage/G/Golodnyie_igry_i_Vspyhnet_plamia_2013_1080p.mkv converted, new url: /storage/G/Golodnyie_igry_i_Vspyhnet_plamia_2013_1080p.mp4
+2024-09-19 10:26:23,869 - INFO - /storage/T/Tri.bogatyirya.i.Pup.Zemli.2023.KP.WEB-DL.1080p.ELEKTRI4KA.UNIONGANG.mkv converted, new url: /storage/T/Tri.bogatyirya.i.Pup.Zemli.2023.KP.WEB-DL.1080p.ELEKTRI4KA.UNIONGANG.mp4
+2024-09-19 10:36:08,890 - INFO - /storage/G/Gnev_Titanov_2012_1080p.mkv converted, new url: /storage/G/Gnev_Titanov_2012_1080p.mp4
+2024-09-19 10:38:13,800 - INFO - /storage/T/Two.for.the.Money.2005.1080p.mp4 converted, new url: /storage/T/Two.for.the.Money.2005.1080p.mp4
+2024-09-19 10:39:47,296 - INFO - /storage/G/The.Giver.2014.1080p.BluRay.DTS.x264.Talian.mkv converted, new url: /storage/G/The.Giver.2014.1080p.BluRay.DTS.x264.Talian.mp4
+2024-09-19 10:45:30,878 - INFO - /storage/G/Gorjachie.golovy.2.1993.BDRip.720p.mkv converted, new url: /storage/G/Gorjachie.golovy.2.1993.BDRip.720p.mp4
+2024-09-19 10:48:48,355 - INFO - /storage/T/The.Tuxedo.2002.1080p.WEB-DL.Rus.Eng.mkv converted, new url: /storage/T/The.Tuxedo.2002.1080p.WEB-DL.Rus.Eng.mp4
+2024-09-19 10:53:46,127 - INFO - /storage/T/TolStayaBOSS.2O16.D.BDRip.72O.mkv converted, new url: /storage/T/TolStayaBOSS.2O16.D.BDRip.72O.mp4
+2024-09-19 10:54:17,132 - INFO - /storage/G/Ghosts.of.War.1080p.mp4 converted, new url: /storage/G/Ghosts.of.War.1080p.mp4
+2024-09-19 11:02:12,712 - INFO - /storage/T/tri.bogatira.naslednica.2018.WEB.DL.1080p.NNMClub.mkv converted, new url: /storage/T/tri.bogatira.naslednica.2018.WEB.DL.1080p.NNMClub.mp4
+2024-09-19 11:06:17,582 - INFO - /storage/G/The.General's.Daughter.1999.1080p.mp4 converted, new url: /storage/G/The.General's.Daughter.1999.1080p.mp4
+2024-09-19 11:12:10,695 - INFO - /storage/T/Trudnaya_mishenj_1993_1080p.mkv converted, new url: /storage/T/Trudnaya_mishenj_1993_1080p.mp4
+2024-09-19 11:15:26,988 - INFO - /storage/G/The.Greatest.Showman.2017.BDRip.1080p.ExKinoRay.mkv converted, new url: /storage/G/The.Greatest.Showman.2017.BDRip.1080p.ExKinoRay.mp4
+2024-09-19 11:19:28,058 - INFO - /storage/T/Temps.2016.L.WEB-DL.1080p.mkv converted, new url: /storage/T/Temps.2016.L.WEB-DL.1080p.mp4
+2024-09-19 11:24:41,088 - INFO - /storage/G/Golgofa.2014.BDRip.1080p.mkv converted, new url: /storage/G/Golgofa.2014.BDRip.1080p.mp4
+2024-09-19 11:25:10,609 - INFO - /storage/T/Thursday.1998.BDRip.720p.mkv converted, new url: /storage/T/Thursday.1998.BDRip.720p.mp4
+2024-09-19 11:32:37,015 - INFO - /storage/T/Tale.of.Tales.2015.BDRip.720p.mkv converted, new url: /storage/T/Tale.of.Tales.2015.BDRip.720p.mp4
+2024-09-19 11:34:39,368 - INFO - /storage/G/Good.Luck.to.You.Leo.Grande.2022.1080p.mp4 converted, new url: /storage/G/Good.Luck.to.You.Leo.Grande.2022.1080p.mp4
+2024-09-19 11:43:56,148 - INFO - /storage/G/Garry_Potter_i_Yznik_Azkaban_2004_720p.mkv converted, new url: /storage/G/Garry_Potter_i_Yznik_Azkaban_2004_720p.mp4
+2024-09-19 11:46:01,038 - INFO - /storage/T/Tri.dnya.na.pobeg.2010.BDRip.1080p.mkv converted, new url: /storage/T/Tri.dnya.na.pobeg.2010.BDRip.1080p.mp4
+2024-09-19 11:54:23,479 - INFO - /storage/G/Golovolomka1080.mkv converted, new url: /storage/G/Golovolomka1080.mp4
+2024-09-19 11:55:05,791 - INFO - /storage/T/Takoy.zhe.predatel.kak.m1.2O16.D.BDRip.1080p.mkv converted, new url: /storage/T/Takoy.zhe.predatel.kak.m1.2O16.D.BDRip.1080p.mp4
+2024-09-19 12:00:49,935 - INFO - /storage/T/Tulip.Fever.2017.BDRip-AVC.RUS.ENG.stalkerok.new-team.mkv converted, new url: /storage/T/Tulip.Fever.2017.BDRip-AVC.RUS.ENG.stalkerok.new-team.mp4
+2024-09-19 12:04:05,857 - INFO - /storage/G/Gringo.2018.BDRip.1080p.ExKinoRay.mkv converted, new url: /storage/G/Gringo.2018.BDRip.1080p.ExKinoRay.mp4
+2024-09-19 12:05:53,438 - INFO - /storage/T/Tom.and.Jerry.Blast.Off.to.Mars.2005.720p.mkv converted, new url: /storage/T/Tom.and.Jerry.Blast.Off.to.Mars.2005.720p.mp4
+2024-09-19 16:42:45,143 - ERROR - Program interrupted manually
+2024-09-19 16:42:45,143 - ERROR - Program interrupted manually
+2024-09-19 16:42:45,143 - ERROR - Program interrupted manually
+2024-09-19 16:43:33,511 - ERROR - Program interrupted manually
+2024-09-19 16:43:33,511 - ERROR - Program interrupted manually
+2024-09-19 16:43:33,511 - ERROR - Program interrupted manually

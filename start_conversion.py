@@ -13,7 +13,7 @@ def load_config():
         return config
     
 conversion = ConvertTask(load_config()) 
-conversion.convert_files()
+conversion.parallel_convert()
 
 
 
