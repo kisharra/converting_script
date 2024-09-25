@@ -285,19 +285,14 @@ class Db_querry():
             'UPDATE video_series_files SET url = REPLACE(url, ?, ?) WHERE url LIKE ?',
             (filename, output_file, '%' + filename)
         )
-            conn.commit()  
+            conn.commit() 
 
-    def test_request(self, filename):
-            with mariadb.connect(
-                host = self.config['maria_db']['host'],
-                user = self.config['maria_db']['user'],
-                password = self.config['maria_db']['password'],
-                database = self.config['maria_db']['database'],
-                port = self.config['maria_db']['port']
-            ) as conn:
-                cur = conn.cursor()
-                cur.execute('SELECT * FROM video_series_files WHERE url LIKE ?', ('%'+filename+'%',))
-                return cur.fetchall()
+    def global_interrupted_querry(self, current_time):
+        with sqlite3.connect(self.db_file) as conn:
+            cur = conn.cursor()
+            cur.execute('UPDATE ConversionTasks SET status=?, end_time=? WHERE status="converting"', ('Conversion interrupted', current_time)) 
+            return cur.fetchall()
+
     
 
 if __name__ == '__main__':

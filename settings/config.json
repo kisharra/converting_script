@@ -1,5 +1,5 @@
 {
-  "sqlite3": "settings/test.db",
+  "sqlite3": "settings/film_storage.db",
   "maria_db": {
     "host": "172.28.1.240",
     "port": 3306,

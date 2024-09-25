@@ -1,7 +1,7 @@
 from datetime import datetime
 import json
 import logging
-from multiprocessing import Pool
+from multiprocessing import Pool, current_process
 import os
 import shutil
 import signal
@@ -71,27 +71,23 @@ class ConvertTask:
         self.bitrate_video_serials = config['bitrate_video_serial']
         self.b_a = config['bitrate_audio']
         self.tmp_dir = os.path.join(config['path_to_main'], config['temp_dir'])
-        self.interrupted = False
-        self.remove_list = []
-        self.file_id = None
         self.get_info = Get_Info(config)
         self.db_file = Db_querry(config)
         logging.basicConfig(filename=self.log_file, level=logging.ERROR, format='%(asctime)s:%(message)s')  #logging to file
     
     def signal_handler(self, signum, frame):
         '''
-        Signal handler for SIGINT signal
+        Handler for signals. It removes temp directory and recreates it
+        Parameters
+        ----------
+        signum : int
+            signal number
+        frame : frame object
+            current stack frame
         '''
-        logging.error('Program interrupted manually')
-        self.interrupted = True
-        # for file in self.remove_list:  #remove temporary files
-        #     if os.path.exists(file):
-        #         os.remove(file)
-        shutil.rmtree(self.tmp_dir)
+        shutil.rmtree(self.tmp_dir, ignore_errors=True)
         os.mkdir(self.tmp_dir)
-        if self.file_id is not None:
-            self.db_file.interrupted_program(datetime.now().strftime(self.data_format), self.file_id)
-        sys.exit(1)
+
 
     def run_ffmpeg(self, input_file, output_file, bitrate, audio_stream_index):
         '''
@@ -179,12 +175,6 @@ class ConvertTask:
         '''
         signal.signal(signal.SIGINT, self.signal_handler)  #register signal handler
 
-        # # video_files = self.db_file.select_data()
-
-        # for file_id, IsFilm, IsConverted, filename, nb_streams, streams in video_files:  #iterate through files
-            # self.file_id = file_id
-            # if self.interrupted:
-            #     break
         file_id, IsFilm, IsConverted, filename, nb_streams, streams = file_data
 
         if nb_streams > 2:  #check if file contains more than 2 streams
@@ -220,7 +210,6 @@ class ConvertTask:
                 with tempfile.TemporaryDirectory(dir=self.tmp_dir) as temp_dir:
                     
                     output_file = os.path.join(temp_dir, os.path.splitext(os.path.basename(filename))[0] + '.mp4')  #create output file path in temp directory
-                    # self.remove_list.append(output_file)  #add file to remove list
                     
                     self.db_file.update_status_of_conversion(file_id, 'converting', datetime.now().strftime(self.data_format))
 
@@ -253,13 +242,15 @@ class ConvertTask:
                         logging.error(f'{filename}: {error_message}')  #logging errors
 
     def parallel_convert(self):
-        signal.signal(signal.SIGINT, self.signal_handler)
         video_files = self.db_file.select_data()
         with Pool(processes=2) as pool:
-            pool.map(self.convert_files, video_files)
-
-    
-
+            try:
+                pool.map(self.convert_files, video_files)
+            except KeyboardInterrupt:
+                self.db_file.global_interrupted_querry(datetime.now().strftime(self.data_format))
+                logging.error("Parallel conversion interrupted.")
+                pool.terminate()
+                pool.join()
 
 if __name__ == '__main__':
     pass

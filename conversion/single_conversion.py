@@ -84,10 +84,7 @@ class ConvertTask:
         '''
         logging.error('Program interrupted manually')
         self.interrupted = True
-        # for file in self.remove_list:  #remove temporary files
-        #     if os.path.exists(file):
-        #         os.remove(file)
-        shutil.rmtree(self.tmp_dir)
+        shutil.rmtree(self.tmp_dir, ignore_errors=True)
         os.mkdir(self.tmp_dir)
         if self.file_id is not None:
             self.db_file.interrupted_program(datetime.now().strftime(self.data_format), self.file_id)
