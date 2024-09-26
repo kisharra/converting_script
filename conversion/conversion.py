@@ -132,7 +132,7 @@ class ConvertTask:
         try:
             result = subprocess.run([arg.format(output_file=output_file) for arg in self.ffmpeg_check_command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
             if result.stderr:
-                return False, result.stderr.decode('utf-8')
+                return False, result.stderr
             else:
                 return True, 'No errors found'
         except Exception as e:
@@ -207,11 +207,19 @@ class ConvertTask:
 
                 os.makedirs(self.tmp_dir, exist_ok=True) # create temporary directory
 
+                success, check_result = self.check_integrity(filename) # check if file is corrupted before conversion
+                
+                if not success:  # if file is corrupted
+                    self.db_file.update_status_first_check(file_id, 'Error: check logs', datetime.now().strftime(self.data_format), datetime.now().strftime(self.data_format))
+                    self.db_file.update_isconverted_after_fail_check(file_id, True)
+                    logging.error(f'{filename} is corrupted. {check_result}. Upload a new working file to ftp.sat-dv.ru')
+                    return  # skip file
+
                 with tempfile.TemporaryDirectory(dir=self.tmp_dir) as temp_dir:
                     
                     output_file = os.path.join(temp_dir, os.path.splitext(os.path.basename(filename))[0] + '.mp4')  #create output file path in temp directory
                     
-                    self.db_file.update_status_of_conversion(file_id, 'converting', datetime.now().strftime(self.data_format))
+                    self.db_file.update_status_of_conversion(file_id, 'converting', datetime.now().strftime(self.data_format))  #update status of a start conversion
 
                     try:
                         if IsFilm:  #check if file is a film

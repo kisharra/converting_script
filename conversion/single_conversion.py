@@ -72,7 +72,6 @@ class ConvertTask:
         self.b_a = config['bitrate_audio']
         self.tmp_dir = os.path.join(config['path_to_main'], config['temp_dir'])
         self.interrupted = False
-        self.remove_list = []
         self.file_id = None
         self.get_info = Get_Info(config)
         self.db_file = Db_querry(config)
@@ -130,10 +129,12 @@ class ConvertTask:
         tuple
             (bool, str) where bool is result of check and str is error or 'No errors found'
         '''
+        # Inform about check
+        print("Checking file if corrupted...")
         try:
             result = subprocess.run([arg.format(output_file=output_file) for arg in self.ffmpeg_check_command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
             if result.stderr:
-                return False, result.stderr.decode('utf-8')
+                return False, result.stderr
             else:
                 return True, 'No errors found'
         except Exception as e:
@@ -158,7 +159,6 @@ class ConvertTask:
             return False
 
     def convert_files(self, file_data):
-
         '''
         Convert files to mp4 format
 
@@ -174,79 +174,85 @@ class ConvertTask:
         If conversion is interrupted manually, remove temporary files and update
         status of conversion in 'ConversionTasks' table.
         '''
-        signal.signal(signal.SIGINT, self.signal_handler)  #register signal handler
+        signal.signal(signal.SIGINT, self.signal_handler)  # register signal handler
 
         video_files = self.db_file.select_single_data(file_data)
 
-        for file_id, IsFilm, IsConverted, filename, nb_streams, streams in video_files:  #iterate through files
+        for file_id, IsFilm, IsConverted, filename, nb_streams, streams in video_files:  # iterate through files
             self.file_id = file_id
             if self.interrupted:
                 break
 
-        if nb_streams > 2:  #check if file contains more than 2 streams
-            streams_info = json.loads(streams)
+            if nb_streams > 2:  # check if file contains more than 2 streams
+                streams_info = json.loads(streams)
 
-            default_rus_index = None
-            first_rus_index = None
+                default_rus_index = None
+                first_rus_index = None
 
-            # iterate through streams and find default=1 track
-            for stream in streams_info:
-                if stream['codec_type'] == 'audio':
-                    language = stream.get('tags', {}).get('language', '')
-                    is_default = stream.get('disposition', {}).get('default', 0)
+                # iterate through streams and find default=1 track
+                for stream in streams_info:
+                    if stream['codec_type'] == 'audio':
+                        language = stream.get('tags', {}).get('language', '')
+                        is_default = stream.get('disposition', {}).get('default', 0)
 
-                    if language == 'rus':
-                        if is_default == 1:
-                            default_rus_index = stream['index']
-                        if first_rus_index is None:
-                            first_rus_index = stream['index']
+                        if language == 'rus':
+                            if is_default == 1:
+                                default_rus_index = stream['index']
+                            if first_rus_index is None:
+                                first_rus_index = stream['index']
 
-            # Priority - track with default=1, if default=1 not found
-            if default_rus_index is not None:
-                selected_index = default_rus_index
-            elif first_rus_index is not None:
-                selected_index = first_rus_index
-            else:
-                selected_index = None
-            
-            if not IsConverted:
+                # Priority - track with default=1, if default=1 not found
+                if default_rus_index is not None:
+                    selected_index = default_rus_index
+                elif first_rus_index is not None:
+                    selected_index = first_rus_index
+                else:
+                    selected_index = None
+                
+                # Check if file is corrupted before conversion
+                success, check_result = self.check_integrity(filename)
+                
+                if not success:  # if file is corrupted
+                    self.db_file.update_status_first_check(file_id, 'Error: check logs', datetime.now().strftime(self.data_format), datetime.now().strftime(self.data_format))
+                    self.db_file.update_isconverted_after_fail_check(file_id, True)
+                    logging.error(f'{filename} is corrupted. {check_result}. Upload a new working file to ftp.sat-dv.ru')
+                    continue  # Skip this file
 
-                os.makedirs(self.tmp_dir, exist_ok=True) # create temporary directory
+                if not IsConverted:
+                    os.makedirs(self.tmp_dir, exist_ok=True)  # Create temporary directory
 
-                with tempfile.TemporaryDirectory(dir=self.tmp_dir) as temp_dir:
-                    
-                    output_file = os.path.join(temp_dir, os.path.splitext(os.path.basename(filename))[0] + '.mp4')  #create output file path in temp directory
-                    # self.remove_list.append(output_file)  #add file to remove list
-                    
-                    self.db_file.update_status_of_conversion(file_id, 'converting', datetime.now().strftime(self.data_format))
+                    with tempfile.TemporaryDirectory(dir=self.tmp_dir) as temp_dir:
+                        
+                        output_file = os.path.join(temp_dir, os.path.splitext(os.path.basename(filename))[0] + '.mp4')  # Create output file path in temp directory
+                        self.db_file.update_status_of_conversion(file_id, 'converting', datetime.now().strftime(self.data_format))
 
-                    try:
-                        if IsFilm:  #check if file is a film
-                            bitrate = self.bitrate_video_film  #set bitrate
-                        else:
-                            bitrate = self.bitrate_video_serials
-                        success = self.run_ffmpeg(filename, output_file, bitrate, selected_index)  #run ffmpeg
-            
-                        if success:
-                            success, check_result = self.check_integrity(output_file)  #check if output file is corrupted
-                            if success:
-                                final_path = os.path.join(os.path.dirname(filename), os.path.basename(output_file))  #path to move final file
-                                shutil.move(output_file, final_path)  #move file to original location
-                                self.db_file.update_status_ending_conversion('done', datetime.now().strftime(self.data_format), check_result, file_id)
-                                video_info = self.get_info.run_ffprobe(final_path)  #get video info of converted file
-                                logging.info(f'{filename} converted, new url: {final_path}')  #logging success
-                                if video_info:
-                                    streams = self.get_info.streams_data(video_info)  #get streams info of converted file
-                                    self.db_file.update_files_table(final_path, True, len(streams), video_info['format']['size'], video_info['format']['bit_rate'], json.dumps(streams), file_id)  #update table 'Files' with new data
-                                    self.db_file.update_url_file(filename, final_path)  #update table 'Video_Series_Files' on Stalker Portal with new url
-                                os.remove(filename) # remove original file
+                        try:
+                            if IsFilm:  # Check if file is a film
+                                bitrate = self.bitrate_video_film  # Set bitrate
                             else:
-                                logging.error(f'{filename}: {check_result}')
-                                self.db_file.update_of_checking_integrity('Error', datetime.now().strftime(self.data_format), 'Error: check logs', file_id)  #update status of checking
+                                bitrate = self.bitrate_video_serials
+                            success = self.run_ffmpeg(filename, output_file, bitrate, selected_index)  # Run ffmpeg
+            
+                            if success:
+                                success, check_result = self.check_integrity(output_file)  # Check if output file is corrupted
+                                if success:
+                                    final_path = os.path.join(os.path.dirname(filename), os.path.basename(output_file))  # Path to move final file
+                                    shutil.move(output_file, final_path)  # Move file to original location
+                                    self.db_file.update_status_ending_conversion('done', datetime.now().strftime(self.data_format), check_result, file_id)
+                                    video_info = self.get_info.run_ffprobe(final_path)  # Get video info of converted file
+                                    logging.info(f'{filename} converted, new url: {final_path}')  # Log success
+                                    if video_info:
+                                        streams = self.get_info.streams_data(video_info)  # Get streams info of converted file
+                                        self.db_file.update_files_table(final_path, True, len(streams), video_info['format']['size'], video_info['format']['bit_rate'], json.dumps(streams), file_id)  # Update table 'Files' with new data
+                                        self.db_file.update_url_file(filename, final_path)  # Update table 'Video_Series_Files' on Stalker Portal with new url
+                                    os.remove(filename)  # Remove original file
+                                else:
+                                    logging.error(f'{filename}: {check_result}')
+                                    self.db_file.update_of_checking_integrity('Error', datetime.now().strftime(self.data_format), 'Error: check logs', file_id)  # Update status of checking
 
-                    except Exception as e:  #catch errors
-                        error_message = str(e)
-                        logging.error(f'{filename}: {error_message}')  #logging errors
+                        except Exception as e:  # Catch errors
+                            error_message = str(e)
+                            logging.error(f'{filename}: {error_message}')  # Log errors
 
 
 if __name__ == '__main__':

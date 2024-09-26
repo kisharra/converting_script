@@ -195,6 +195,38 @@ class Db_querry():
             cur = conn.cursor()
             cur.execute('INSERT INTO ConversionTasks (file_id, status, start_time) VALUES (?, ?, ?)', (file_id, status, current_time))  #update status of conversion
             conn.commit()
+
+    def update_status_first_check(self, file_id, status, start_time, end_time):
+        """
+        Update ConversionTasks table with status when first check ends
+        
+        Parameters
+        ----------
+        file_id : int
+            id of file in database
+        status : str
+            status of conversion
+        """
+        with sqlite3.connect(self.db_file) as conn:
+            cur = conn.cursor()
+            cur.execute('INSERT INTO ConversionTasks (file_id, status, start_time, end_time) VALUES (?, ?, ?, ?)', (file_id, status, start_time, end_time))  #update status of conversion
+            conn.commit()
+    
+    def update_isconverted_after_fail_check(self, file_id, is_converted):
+        """
+        Update 'IsConverted' in 'Files' table after check of integrity has failed
+
+        Parameters
+        ----------
+        file_id : int
+            id of file in database
+        is_converted : int
+            status of conversion
+        """
+        with sqlite3.connect(self.db_file) as conn:
+            cur = conn.cursor()
+            cur.execute('UPDATE Files SET IsConverted=? WHERE id=?', (is_converted, file_id))
+            conn.commit()
     
     def update_status_ending_conversion(self, status, current_time, check_result, file_id):
         """

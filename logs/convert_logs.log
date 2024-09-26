@@ -57,8 +57,10 @@
 2024-09-19 12:00:49,935 - INFO - /storage/T/Tulip.Fever.2017.BDRip-AVC.RUS.ENG.stalkerok.new-team.mkv converted, new url: /storage/T/Tulip.Fever.2017.BDRip-AVC.RUS.ENG.stalkerok.new-team.mp4
 2024-09-19 12:04:05,857 - INFO - /storage/G/Gringo.2018.BDRip.1080p.ExKinoRay.mkv converted, new url: /storage/G/Gringo.2018.BDRip.1080p.ExKinoRay.mp4
 2024-09-19 12:05:53,438 - INFO - /storage/T/Tom.and.Jerry.Blast.Off.to.Mars.2005.720p.mkv converted, new url: /storage/T/Tom.and.Jerry.Blast.Off.to.Mars.2005.720p.mp4
-2024-09-25 11:49:27,984 - ERROR - Parallel conversion interrupted.
-2024-09-25 12:13:49,234 - ERROR - Parallel conversion interrupted.
-2024-09-25 12:13:52,371 - ERROR - Parallel conversion interrupted.
-2024-09-25 12:15:58,230 - ERROR - Parallel conversion interrupted.
-2024-09-25 12:19:00,976 - ERROR - Parallel conversion interrupted.
+2024-09-26 10:31:56,143 - ERROR - /storage/G/Genchini_protiv_mugchin_2015_1080p.ts is corrupted. 'str' object has no attribute 'decode'. Upload a new working file to ftp.sat-dv.ru
+2024-09-26 10:51:21,375 - ERROR - /storage/G/Genchini_protiv_mugchin_2015_1080p.ts is corrupted. [h264 @ 0x5c40daeb6c00] number of reference frames (0+5) exceeds max (4; probably corrupt input), discarding one
+[h264 @ 0x5c40db56cac0] number of reference frames (0+5) exceeds max (4; probably corrupt input), discarding one
+[null @ 0x5c40dafe1640] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 3 >= 0
+[h264 @ 0x5c40db2b3b40] Reference 4 >= 4
+[h264 @ 0x5c40db2b3b40] error while decoding MB 23 28, bytestream 16406
+. Upload a new working file to ftp.sat-dv.ru
