@@ -6,3 +6,5 @@
 **/__pycache__
 # disable virt_venv
 virt_env
+# disable logs
+/logs

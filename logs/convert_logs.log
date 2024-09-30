@@ -57,10 +57,184 @@
 2024-09-19 12:00:49,935 - INFO - /storage/T/Tulip.Fever.2017.BDRip-AVC.RUS.ENG.stalkerok.new-team.mkv converted, new url: /storage/T/Tulip.Fever.2017.BDRip-AVC.RUS.ENG.stalkerok.new-team.mp4
 2024-09-19 12:04:05,857 - INFO - /storage/G/Gringo.2018.BDRip.1080p.ExKinoRay.mkv converted, new url: /storage/G/Gringo.2018.BDRip.1080p.ExKinoRay.mp4
 2024-09-19 12:05:53,438 - INFO - /storage/T/Tom.and.Jerry.Blast.Off.to.Mars.2005.720p.mkv converted, new url: /storage/T/Tom.and.Jerry.Blast.Off.to.Mars.2005.720p.mp4
-2024-09-26 10:31:56,143 - ERROR - /storage/G/Genchini_protiv_mugchin_2015_1080p.ts is corrupted. 'str' object has no attribute 'decode'. Upload a new working file to ftp.sat-dv.ru
-2024-09-26 10:51:21,375 - ERROR - /storage/G/Genchini_protiv_mugchin_2015_1080p.ts is corrupted. [h264 @ 0x5c40daeb6c00] number of reference frames (0+5) exceeds max (4; probably corrupt input), discarding one
-[h264 @ 0x5c40db56cac0] number of reference frames (0+5) exceeds max (4; probably corrupt input), discarding one
-[null @ 0x5c40dafe1640] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 3 >= 0
-[h264 @ 0x5c40db2b3b40] Reference 4 >= 4
-[h264 @ 0x5c40db2b3b40] error while decoding MB 23 28, bytestream 16406
-. Upload a new working file to ftp.sat-dv.ru
+2024-09-26 12:49:13,767 - ERROR - /storage/G/Genchini_protiv_mugchin_2015_1080p.ts is corrupted. Upload a new working file to ftp.sat-dv.ru
+2024-09-26 12:50:35,878 - ERROR - Parallel conversion interrupted.
+2024-09-26 14:19:18,261 - INFO - /storage/M/Megan.2024.1080p.AMZN.New-Team.mkv converted, new url: /storage/M/Megan.2024.1080p.AMZN.New-Team.mp4
+2024-09-26 14:24:55,539 - ERROR - Parallel conversion interrupted.
+2024-09-26 14:26:35,880 - ERROR - Parallel conversion interrupted.
+2024-09-26 14:27:49,726 - ERROR - Parallel conversion interrupted.
+2024-09-26 14:46:35,697 - INFO - /storage/T/Thirteen.Lives.2022.AMZN.WEB-DL.1080p.seleZen.mkv converted, new url: /storage/T/Thirteen.Lives.2022.AMZN.WEB-DL.1080p.seleZen.mp4
+2024-09-26 14:47:30,784 - INFO - /storage/G/Garri_Potter_i_Dary_smerti_1_2010_1080p.mkv converted, new url: /storage/G/Garri_Potter_i_Dary_smerti_1_2010_1080p.mp4
+2024-09-26 14:52:19,975 - ERROR - /storage/G/Ghostbusters.2016.BDRip.1080p.mkv is corrupted. Upload a new working file to ftp.sat-dv.ru
+2024-09-26 15:00:09,523 - INFO - /storage/T/Turist.2010.x264.BDRip.1080p.mkv converted, new url: /storage/T/Turist.2010.x264.BDRip.1080p.mp4
+2024-09-26 15:01:05,377 - INFO - /storage/G/Gorbun.iz.Notr.Dama.2.2002.mkv converted, new url: /storage/G/Gorbun.iz.Notr.Dama.2.2002.mp4
+2024-09-26 15:11:56,030 - INFO - /storage/T/Tabaluga.2018.mkv converted, new url: /storage/T/Tabaluga.2018.mp4
+2024-09-26 15:13:20,073 - ERROR - Parallel conversion interrupted.
+
+2024-09-26 15:29:45,680 - ERROR - /storage/G/The.Grey.2011.BDRip.720p.mkv is corrupted after conversion.
+2024-09-26 15:39:16,343 - INFO - /storage/T/The.Talented.mr.Ripley.1999.x264.BDRip.1080p.mkv converted, new url: /storage/T/The.Talented.mr.Ripley.1999.x264.BDRip.1080p.mp4
+2024-09-26 15:42:40,494 - INFO - /storage/G/Gentlemen.Prefer.Blondes.1953.BDRip.1080p.Rus.mkv converted, new url: /storage/G/Gentlemen.Prefer.Blondes.1953.BDRip.1080p.Rus.mp4
+2024-09-26 15:47:27,830 - INFO - /storage/T/Takers.2010.BD.720.Hot-Film.mkv converted, new url: /storage/T/Takers.2010.BD.720.Hot-Film.mp4
+2024-09-26 15:53:26,906 - INFO - /storage/G/Gun.Shy.2017.BDRip.1080p.ExKinoRay.mkv converted, new url: /storage/G/Gun.Shy.2017.BDRip.1080p.ExKinoRay.mp4
+2024-09-26 16:01:33,142 - INFO - /storage/T/The.Town.2010.1080.mp4 converted, new url: /storage/T/The.Town.2010.1080.mp4
+2024-09-26 16:06:07,467 - INFO - /storage/G/Godzilla.vs.Kong.WEB-DL.1080p.pk.mkv converted, new url: /storage/G/Godzilla.vs.Kong.WEB-DL.1080p.pk.mp4
+2024-09-26 16:16:54,211 - INFO - /storage/T/Telo.Hristovo.2019.1080p.BluRay.ELEKTRI4KA.UNIONGANG.mkv converted, new url: /storage/T/Telo.Hristovo.2019.1080p.BluRay.ELEKTRI4KA.UNIONGANG.mp4
+2024-09-26 16:18:10,205 - INFO - /storage/G/The.Good.Witchs.Charm.2012.1080p.WEBRip.DD5.1.x264-TrollHD.mkv converted, new url: /storage/G/The.Good.Witchs.Charm.2012.1080p.WEBRip.DD5.1.x264-TrollHD.mp4
+2024-09-26 16:31:44,814 - INFO - /storage/T/Tehasskaja.reznja.benzopiloj.Nachalo.2006.BDRip.1080p.denis100.mkv converted, new url: /storage/T/Tehasskaja.reznja.benzopiloj.Nachalo.2006.BDRip.1080p.denis100.mp4
+2024-09-26 16:32:51,660 - INFO - /storage/G/Gut.gegen.Nordwind.2019.x264.BDRip.1080p.Rus.Ger.ExKinoRay.mkv converted, new url: /storage/G/Gut.gegen.Nordwind.2019.x264.BDRip.1080p.Rus.Ger.ExKinoRay.mp4
+2024-09-26 16:46:43,729 - INFO - /storage/G/Geostorm.2017.BDRip.1080p.ExKinoRay.mkv converted, new url: /storage/G/Geostorm.2017.BDRip.1080p.ExKinoRay.mp4
+2024-09-26 16:47:23,542 - INFO - /storage/T/Tri.dnya.Kondora.1975.x264.BDRip.1080p-Kinozal-TV-HD.mkv converted, new url: /storage/T/Tri.dnya.Kondora.1975.x264.BDRip.1080p-Kinozal-TV-HD.mp4
+2024-09-26 16:53:20,115 - INFO - /storage/T/Tito.And.The.Birds.2018.WEB-DL.720p.NewStation.mkv converted, new url: /storage/T/Tito.And.The.Birds.2018.WEB-DL.720p.NewStation.mp4
+2024-09-26 16:54:29,806 - INFO - /storage/G/Guyver_1991.mkv converted, new url: /storage/G/Guyver_1991.mp4
+2024-09-26 17:00:50,001 - INFO - /storage/T/Tom.and.Jerry.The.Lost.Dragon.2014.1080p.mkv converted, new url: /storage/T/Tom.and.Jerry.The.Lost.Dragon.2014.1080p.mp4
+2024-09-26 17:01:58,005 - INFO - /storage/G/Gordost.And.Prejudice.And.Zombies.2016.mkv converted, new url: /storage/G/Gordost.And.Prejudice.And.Zombies.2016.mp4
+2024-09-26 17:12:57,058 - INFO - /storage/G/Get.the.Gringo.2012.1080p.mp4 converted, new url: /storage/G/Get.the.Gringo.2012.1080p.mp4
+2024-09-26 17:16:54,922 - INFO - /storage/T/Take.the.leas.2006.1080p.mkv converted, new url: /storage/T/Take.the.leas.2006.1080p.mp4
+2024-09-26 17:23:29,973 - INFO - /storage/G/Gretel.&.Hansel.WEB-DL.1080p.mkv converted, new url: /storage/G/Gretel.&.Hansel.WEB-DL.1080p.mp4
+2024-09-26 17:29:16,980 - INFO - /storage/T/Toy.Story.4.2019_1080p_BDRip_r5_scarabey.org.mkv converted, new url: /storage/T/Toy.Story.4.2019_1080p_BDRip_r5_scarabey.org.mp4
+2024-09-26 17:30:49,657 - INFO - /storage/G/Grjaz.2013.BDRip.720p.mkv converted, new url: /storage/G/Grjaz.2013.BDRip.720p.mp4
+2024-09-26 17:41:39,487 - INFO - /storage/G/The.Grinch.2018.BluRay.1080p.NNMClub.mkv converted, new url: /storage/G/The.Grinch.2018.BluRay.1080p.NNMClub.mp4
+2024-09-26 17:42:43,121 - INFO - /storage/T/Traffik.2018.BDRip.1080p.ExKinoRay.mkv converted, new url: /storage/T/Traffik.2018.BDRip.1080p.ExKinoRay.mp4
+2024-09-26 17:47:13,203 - ERROR - Parallel conversion interrupted.
+2024-09-27 09:13:49,612 - INFO - /storage/T/Transporter.3.2008.BD.Rip.720p.h264.Rus.Eng.mkv converted, new url: /storage/T/Transporter.3.2008.BD.Rip.720p.h264.Rus.Eng.mp4
+2024-09-27 09:17:56,953 - INFO - /storage/G/Hypnotic.2023.WEB-DL.1080p.seleZen.mkv converted, new url: /storage/G/Hypnotic.2023.WEB-DL.1080p.seleZen.mp4
+2024-09-27 09:28:15,473 - INFO - /storage/T/Tremors.6.A.Cold.Day.in.Hell.2018.BDRip-1080p.RusFilm.mkv converted, new url: /storage/T/Tremors.6.A.Cold.Day.in.Hell.2018.BDRip-1080p.RusFilm.mp4
+2024-09-27 09:31:09,648 - INFO - /storage/G/Gangster.Squad.2013.BDRip.1080p.mkv converted, new url: /storage/G/Gangster.Squad.2013.BDRip.1080p.mp4
+2024-09-27 09:47:03,207 - INFO - /storage/G/Gindenburg.Poslednij.polet.2011.x264.BDRip.720p.mkv converted, new url: /storage/G/Gindenburg.Poslednij.polet.2011.x264.BDRip.720p.mp4
+2024-09-27 09:48:31,715 - INFO - /storage/T/Tanzujushij.S.Volkami.BDRip.720p.mkv converted, new url: /storage/T/Tanzujushij.S.Volkami.BDRip.720p.mp4
+2024-09-27 10:01:36,141 - INFO - /storage/G/Gone.Girl.2014.720p.BluRay.2xRus.Ukr.Eng.HDCLUB.mkv converted, new url: /storage/G/Gone.Girl.2014.720p.BluRay.2xRus.Ukr.Eng.HDCLUB.mp4
+2024-09-27 10:02:07,351 - INFO - /storage/T/Tehasskaja.reznja.benzopiloj.2003.BDRip.1080p.denis100.mkv converted, new url: /storage/T/Tehasskaja.reznja.benzopiloj.2003.BDRip.1080p.denis100.mp4
+2024-09-27 10:15:46,218 - INFO - /storage/T/Tronutye.2014.BDRip.1080p.mkv converted, new url: /storage/T/Tronutye.2014.BDRip.1080p.mp4
+2024-09-27 10:22:21,987 - INFO - /storage/G/Gizn_Adel_2013_1080p.mkv converted, new url: /storage/G/Gizn_Adel_2013_1080p.mp4
+2024-09-27 10:27:46,818 - INFO - /storage/T/The.Thirteenth.Floor.1999.BDRip.1080p.MediaClub.mkv converted, new url: /storage/T/The.Thirteenth.Floor.1999.BDRip.1080p.MediaClub.mp4
+2024-09-27 10:28:41,063 - INFO - /storage/G/Gubka.Bob.2015.D.WEBRip.720p.mkv converted, new url: /storage/G/Gubka.Bob.2015.D.WEBRip.720p.mp4
+2024-09-27 10:39:39,773 - INFO - /storage/T/Transformers.2007.720p.BluRay.x264.mkv converted, new url: /storage/T/Transformers.2007.720p.BluRay.x264.mp4
+2024-09-27 10:45:16,347 - INFO - /storage/G/Golodnyie_igry_i_Soika_peresmeshica_2_2015_1080p.mkv converted, new url: /storage/G/Golodnyie_igry_i_Soika_peresmeshica_2_2015_1080p.mp4
+2024-09-27 10:51:44,513 - INFO - /storage/T/Treasure.Planet.2002.BDRip.1080.mkv converted, new url: /storage/T/Treasure.Planet.2002.BDRip.1080.mp4
+2024-09-27 10:56:37,990 - INFO - /storage/G/Green.Room.2015.1080p.k.e.n.mkv converted, new url: /storage/G/Green.Room.2015.1080p.k.e.n.mp4
+2024-09-27 10:58:50,869 - INFO - /storage/T/Tangled.Before.Ever.After.2017.WEB.DL.1080.mkv converted, new url: /storage/T/Tangled.Before.Ever.After.2017.WEB.DL.1080.mp4
+2024-09-27 11:10:23,594 - INFO - /storage/G/The.Gentlemen.WEB-DL.1080p.HD.m4v converted, new url: /storage/G/The.Gentlemen.WEB-DL.1080p.HD.mp4
+2024-09-27 11:13:53,993 - INFO - /storage/T/Triumf.2005.BDRip.1080.mkv converted, new url: /storage/T/Triumf.2005.BDRip.1080.mp4
+2024-09-27 11:17:46,116 - INFO - /storage/G/The.Guest.2014.720p.BluRay.x264.Rus.Eng.Subs-VietHD.mkv converted, new url: /storage/G/The.Guest.2014.720p.BluRay.x264.Rus.Eng.Subs-VietHD.mp4
+2024-09-27 11:24:58,288 - INFO - /storage/T/The.Transporter.2002.1080p.mkv converted, new url: /storage/T/The.Transporter.2002.1080p.mp4
+2024-09-27 11:30:48,530 - INFO - /storage/G/Ghostbusters.1984.BDRip.1080p.Rus.Eng.Sub.mkv converted, new url: /storage/G/Ghostbusters.1984.BDRip.1080p.Rus.Eng.Sub.mp4
+2024-09-27 11:37:45,827 - INFO - /storage/T/Tully.2018.web-DL.108Op.werecut.PROD.mkv converted, new url: /storage/T/Tully.2018.web-DL.108Op.werecut.PROD.mp4
+2024-09-27 11:46:04,646 - INFO - /storage/G/grinch.2000.BDRip.1080p.Rus.Eng.mkv converted, new url: /storage/G/grinch.2000.BDRip.1080p.Rus.Eng.mp4
+2024-09-27 11:53:37,787 - INFO - /storage/T/Truman_Show.mkv converted, new url: /storage/T/Truman_Show.mp4
+2024-09-27 11:57:15,442 - INFO - /storage/G/GALVESTON.2018.WEB.DL.1080.mkv converted, new url: /storage/G/GALVESTON.2018.WEB.DL.1080.mp4
+2024-09-27 12:04:39,813 - INFO - /storage/T/The.Shallows.2016.D.BluRay1080p.mkv converted, new url: /storage/T/The.Shallows.2016.D.BluRay1080p.mp4
+2024-09-27 12:10:03,680 - INFO - /storage/G/Garlic.2017.x264.BDRip.1080p.OlLanDGroup.mkv converted, new url: /storage/G/Garlic.2017.x264.BDRip.1080p.OlLanDGroup.mp4
+2024-09-27 12:20:10,021 - INFO - /storage/T/Time.Freak.2018.BDRip.1080p.mkv converted, new url: /storage/T/Time.Freak.2018.BDRip.1080p.mp4
+2024-09-27 12:25:50,282 - INFO - /storage/G/The.Girl.on.the.Train.2016.BDRip.1080p.qqss44.mkv converted, new url: /storage/G/The.Girl.on.the.Train.2016.BDRip.1080p.qqss44.mp4
+2024-09-27 12:29:50,832 - ERROR - /storage/G/Garry_Potter_i_Kubok_ogny_2005_1080p.mkv is corrupted. Upload a new working file to ftp.sat-dv.ru
+2024-09-27 12:31:33,332 - ERROR - /storage/G/GP13Li.2O15.P.BDRip.720p.mkv is corrupted. Upload a new working file to ftp.sat-dv.ru
+2024-09-27 12:31:45,342 - ERROR - Parallel conversion interrupted.
+2024-09-27 14:17:48,356 - INFO - /storage/T/Top.Gun.1986.BDRip.1080p.mkv converted, new url: /storage/T/Top.Gun.1986.BDRip.1080p.mp4
+2024-09-27 14:27:59,344 - INFO - /storage/T/Them.That.Follow.2019.AMZN.WEB-DL.1080p.seleZen.mkv converted, new url: /storage/T/Them.That.Follow.2019.AMZN.WEB-DL.1080p.seleZen.mp4
+2024-09-27 14:38:59,373 - INFO - /storage/T/Three.Thousand.Years.Of.Longing.2022.1080p.mp4 converted, new url: /storage/T/Three.Thousand.Years.Of.Longing.2022.1080p.mp4
+2024-09-27 14:46:35,460 - INFO - /storage/T/Technotise.Edit.i.ja.2009.mkv converted, new url: /storage/T/Technotise.Edit.i.ja.2009.mp4
+2024-09-27 14:58:11,304 - INFO - /storage/T/The.Tinder.Swindler.2022.1080.New.Team.mkv converted, new url: /storage/T/The.Tinder.Swindler.2022.1080.New.Team.mp4
+2024-09-27 15:04:45,003 - INFO - /storage/T/The.Tigger.Movie.2000.BDRip.720p.mkv converted, new url: /storage/T/The.Tigger.Movie.2000.BDRip.720p.mp4
+2024-09-27 15:18:15,682 - INFO - /storage/T/Tunnelen.WEB-DL.1080p.HD.m4v converted, new url: /storage/T/Tunnelen.WEB-DL.1080p.HD.mp4
+2024-09-27 15:28:47,957 - INFO - /storage/T/Terror.on.the.Prairie.2022.1080p.BluRay.2xRus.Eng-Delia_EniaHD.mkv converted, new url: /storage/T/Terror.on.the.Prairie.2022.1080p.BluRay.2xRus.Eng-Delia_EniaHD.mp4
+2024-09-27 15:36:59,335 - INFO - /storage/T/Tetris.2023.720p.ATVP.WEB-DL.ExKinoRay.mkv converted, new url: /storage/T/Tetris.2023.720p.ATVP.WEB-DL.ExKinoRay.mp4
+2024-09-27 15:45:37,559 - INFO - /storage/T/Trolls.World.Tour.2020.1080p.WEB-DL.1080p.mkv converted, new url: /storage/T/Trolls.World.Tour.2020.1080p.WEB-DL.1080p.mp4
+2024-09-27 15:55:26,313 - INFO - /storage/T/Tolo.Tolo.BDRip.1080p.iTunes.mkv converted, new url: /storage/T/Tolo.Tolo.BDRip.1080p.iTunes.mp4
+2024-09-27 16:08:22,730 - INFO - /storage/T/Trudnosti.perevoda.2003.BDRip.1080p.mkv converted, new url: /storage/T/Trudnosti.perevoda.2003.BDRip.1080p.mp4
+2024-09-27 16:27:34,173 - ERROR - Parallel conversion interrupted.
+2024-09-27 16:46:12,991 - INFO - /storage/G/Golodnie_igry_2012_1080p.mkv converted, new url: /storage/G/Golodnie_igry_2012_1080p.mp4
+2024-09-27 16:53:00,948 - INFO - /storage/G/Grom.Trudnoe.detstvo.2022.WEBRip.1080p.mkv converted, new url: /storage/G/Grom.Trudnoe.detstvo.2022.WEBRip.1080p.mp4
+2024-09-27 16:54:08,609 - INFO - /storage/T/Troja.Directors.Cut_2004.BDRip1080p.mkv converted, new url: /storage/T/Troja.Directors.Cut_2004.BDRip1080p.mp4
+2024-09-27 17:02:43,817 - INFO - /storage/G/Gena_puteshestvennika_vo_vremeni_2009_720p.mkv converted, new url: /storage/G/Gena_puteshestvennika_vo_vremeni_2009_720p.mp4
+2024-09-27 17:04:46,695 - INFO - /storage/T/The.Transporter.Refueled.2015.BDRip.1080p.mkv converted, new url: /storage/T/The.Transporter.Refueled.2015.BDRip.1080p.mp4
+2024-09-27 17:06:17,337 - ERROR - /storage/G/The.Glorious.Seven.2019.WEB-DL.1080p.mkv is corrupted. Upload a new working file to ftp.sat-dv.ru
+2024-09-27 17:15:56,033 - INFO - /storage/T/Triple.Threat.2019.BDRip.1080p.seleZen.mkv converted, new url: /storage/T/Triple.Threat.2019.BDRip.1080p.seleZen.mp4
+2024-09-27 17:28:02,664 - INFO - /storage/G/Garri_Potter_i_Filosofskij_kamen_2001_720p.mkv converted, new url: /storage/G/Garri_Potter_i_Filosofskij_kamen_2001_720p.mp4
+2024-09-27 17:36:34,174 - INFO - /storage/G/Gespensterjager.2015.BDRip.720p.mkv converted, new url: /storage/G/Gespensterjager.2015.BDRip.720p.mp4
+2024-09-27 17:36:44,700 - ERROR - /storage/G/Gespensterjager.2015.BDRip.720p.mkv: Lost connection to server at 'reading authorization packet', system error: 11
+2024-09-27 17:37:20,814 - INFO - /storage/T/The.Traitor.2019.BDRip.1080p.seleZen.mkv converted, new url: /storage/T/The.Traitor.2019.BDRip.1080p.seleZen.mp4
+2024-09-27 17:48:49,769 - ERROR - Parallel conversion interrupted.
+2024-09-30 09:22:46,766 - INFO - /storage/T/Teken.2010.x264.BDRip.1080p.mkv converted, new url: /storage/T/Teken.2010.x264.BDRip.1080p.mp4
+2024-09-30 09:22:49,843 - ERROR - /storage/T/Teken.2010.x264.BDRip.1080p.mkv: Can't connect to server on '172.28.1.240' (115)
+2024-09-30 09:23:19,529 - INFO - /storage/G/Glaz.2008.BDRip.1080p.mkv converted, new url: /storage/G/Glaz.2008.BDRip.1080p.mp4
+2024-09-30 09:32:35,435 - INFO - /storage/T/Tri.Devyatki.2016.Rus.Eng.BDRip.720p.mkv converted, new url: /storage/T/Tri.Devyatki.2016.Rus.Eng.BDRip.720p.mp4
+2024-09-30 09:35:39,909 - INFO - /storage/G/Get.Out.2017.BDRip.1080p.mkv converted, new url: /storage/G/Get.Out.2017.BDRip.1080p.mp4
+2024-09-30 09:42:36,474 - INFO - /storage/G/Goryachaya_tochka_2007_720p.mkv converted, new url: /storage/G/Goryachaya_tochka_2007_720p.mp4
+2024-09-30 09:44:04,358 - INFO - /storage/T/Taksi.4.2007.BDRip.1080p.mkv converted, new url: /storage/T/Taksi.4.2007.BDRip.1080p.mp4
+2024-09-30 09:51:07,408 - INFO - /storage/T/Trans.2013.DUAL.BDRip.720p.x264.AC3.-HQ-ViDEO.mkv converted, new url: /storage/T/Trans.2013.DUAL.BDRip.720p.x264.AC3.-HQ-ViDEO.mp4
+2024-09-30 10:00:20,759 - INFO - /storage/G/Gran.Turismo.2023.WEB-DLRip.1080p.seleZen.mkv converted, new url: /storage/G/Gran.Turismo.2023.WEB-DLRip.1080p.seleZen.mp4
+2024-09-30 10:03:45,931 - INFO - /storage/T/Twister.1996.x264.BDRip.1080.mkv converted, new url: /storage/T/Twister.1996.x264.BDRip.1080.mp4
+2024-09-30 10:09:41,151 - INFO - /storage/T/Tyomnyi.Mir.Ravnovesiye.2013.BDRip.mkv converted, new url: /storage/T/Tyomnyi.Mir.Ravnovesiye.2013.BDRip.mp4
+2024-09-30 10:14:24,633 - INFO - /storage/G/Gercules_1997_1080p.mkv converted, new url: /storage/G/Gercules_1997_1080p.mp4
+2024-09-30 10:22:46,045 - INFO - /storage/T/Taking.of.Pelham.123.2009.1080p.mkv converted, new url: /storage/T/Taking.of.Pelham.123.2009.1080p.mp4
+2024-09-30 10:26:22,984 - INFO - /storage/G/Gravity_2013_1080p.mkv converted, new url: /storage/G/Gravity_2013_1080p.mp4
+2024-09-30 10:32:28,611 - INFO - /storage/G/Good_Boys_2019_BDRip-AVC_by_Dalemake.mkv converted, new url: /storage/G/Good_Boys_2019_BDRip-AVC_by_Dalemake.mp4
+2024-09-30 10:38:19,198 - INFO - /storage/T/traffik.2021.BDRip.1080.mkv converted, new url: /storage/T/traffik.2021.BDRip.1080.mp4
+2024-09-30 10:46:19,077 - INFO - /storage/G/Grjaznye.prelesti.2002.x264.BDRip.1080p.mkv converted, new url: /storage/G/Grjaznye.prelesti.2002.x264.BDRip.1080p.mp4
+2024-09-30 10:49:25,728 - INFO - /storage/T/The.Titan.2018.MVO.1080p.AMZN.WEB-DL.mkv converted, new url: /storage/T/The.Titan.2018.MVO.1080p.AMZN.WEB-DL.mp4
+2024-09-30 11:01:29,219 - INFO - /storage/G/Geleznyi_chelovek_2_2010_1080p.mkv converted, new url: /storage/G/Geleznyi_chelovek_2_2010_1080p.mp4
+2024-09-30 11:02:38,752 - INFO - /storage/T/Thor.2011.BDRip.1080p.Rus.mkv converted, new url: /storage/T/Thor.2011.BDRip.1080p.Rus.mp4
+2024-09-30 11:13:14,261 - INFO - /storage/G/The.Grudge.2020.BDRip.1080p.mkv converted, new url: /storage/G/The.Grudge.2020.BDRip.1080p.mp4
+2024-09-30 11:13:42,616 - INFO - /storage/T/Trading.Paint.2019.BDRip.1080p.mkv converted, new url: /storage/T/Trading.Paint.2019.BDRip.1080p.mp4
+2024-09-30 11:25:51,553 - INFO - /storage/T/TAU.2018.NF.WEB-DL.1080p.ExKinoRay.mkv converted, new url: /storage/T/TAU.2018.NF.WEB-DL.1080p.ExKinoRay.mp4
+2024-09-30 11:26:55,995 - INFO - /storage/G/Ghostbusters.22.1080p.mkv converted, new url: /storage/G/Ghostbusters.22.1080p.mp4
+2024-09-30 11:36:02,771 - INFO - /storage/T/Tvortsyi.snov.2020.BDRip.1080p.ELEKTRI4KA.UNIONGANG.mkv converted, new url: /storage/T/Tvortsyi.snov.2020.BDRip.1080p.ELEKTRI4KA.UNIONGANG.mp4
+2024-09-30 11:43:24,211 - INFO - /storage/G/Guardians.of.the.Galaxy.IMAX.2014.1080p.BluRay.x264.mkv converted, new url: /storage/G/Guardians.of.the.Galaxy.IMAX.2014.1080p.BluRay.x264.mp4
+2024-09-30 11:46:30,466 - ERROR - Parallel conversion interrupted.
+2024-09-30 12:02:58,216 - INFO - /storage/G/GENIUS_WEB_DL_1080p-BLUEBIRD.mkv converted, new url: /storage/G/GENIUS_WEB_DL_1080p-BLUEBIRD.mp4
+2024-09-30 12:08:08,319 - INFO - /storage/T/Trumbo.2015.x264.BDRip.1080p.BLUEBIRD.mkv converted, new url: /storage/T/Trumbo.2015.x264.BDRip.1080p.BLUEBIRD.mp4
+2024-09-30 12:17:50,668 - INFO - /storage/G/Gonka_2013_1080p.mkv converted, new url: /storage/G/Gonka_2013_1080p.mp4
+2024-09-30 12:18:29,968 - INFO - /storage/T/Tsifrovaya.radiostntsiya.2013.BDRip.1080p.mkv converted, new url: /storage/T/Tsifrovaya.radiostntsiya.2013.BDRip.1080p.mp4
+2024-09-30 12:31:12,315 - INFO - /storage/T/Thor.The.Dark.World.2013.BDRip.1080p.Rus.Eng.mkv converted, new url: /storage/T/Thor.The.Dark.World.2013.BDRip.1080p.Rus.Eng.mp4
+2024-09-30 12:32:20,434 - INFO - /storage/G/The.Green.Knight.2020.1080p.mp4 converted, new url: /storage/G/The.Green.Knight.2020.1080p.mp4
+2024-09-30 12:40:33,839 - INFO - /storage/T/Tarapaty.2017.AMZN.WEB-DL.1080p.mkv converted, new url: /storage/T/Tarapaty.2017.AMZN.WEB-DL.1080p.mp4
+2024-09-30 12:45:50,158 - INFO - /storage/G/Ghoul.2015.1080p.mkv converted, new url: /storage/G/Ghoul.2015.1080p.mp4
+2024-09-30 12:48:23,331 - INFO - /storage/T/Thinner.1996.720p.BluRay.Rus.Eng.HDCLUB.mkv converted, new url: /storage/T/Thinner.1996.720p.BluRay.Rus.Eng.HDCLUB.mp4
+2024-09-30 12:58:30,458 - INFO - /storage/G/Givotnoe_2001_1080p.mkv converted, new url: /storage/G/Givotnoe_2001_1080p.mp4
+2024-09-30 13:00:09,833 - INFO - /storage/T/Triumph.2021.KP.WEB-DL.1080p.ELEKTRI4KA.UNIONGANG.mkv converted, new url: /storage/T/Triumph.2021.KP.WEB-DL.1080p.ELEKTRI4KA.UNIONGANG.mp4
+2024-09-30 13:10:13,188 - INFO - /storage/G/Gnomeo_i_Dgulieta_2011_1080p.mkv converted, new url: /storage/G/Gnomeo_i_Dgulieta_2011_1080p.mp4
+2024-09-30 13:14:02,828 - INFO - /storage/T/Televedushhij_I_snova_zdravstvujte.2013.x264.BDRip.1080p.fanatus.mkv converted, new url: /storage/T/Televedushhij_I_snova_zdravstvujte.2013.x264.BDRip.1080p.fanatus.mp4
+2024-09-30 13:22:00,938 - INFO - /storage/G/Greta.2018.BDRip.1080p.seleZen.mkv converted, new url: /storage/G/Greta.2018.BDRip.1080p.seleZen.mp4
+2024-09-30 13:33:47,563 - INFO - /storage/T/Thugs.Of.Hindostan.2018.BDRip.1080p.HDReactor.mkv converted, new url: /storage/T/Thugs.Of.Hindostan.2018.BDRip.1080p.HDReactor.mp4
+2024-09-30 13:34:20,912 - INFO - /storage/G/Game.Over.Man.2018.1080p.Netflix.WEBRip.MediaClub.mkv converted, new url: /storage/G/Game.Over.Man.2018.1080p.Netflix.WEBRip.MediaClub.mp4
+2024-09-30 13:52:23,224 - INFO - /storage/T/Tetrad.Smerti.3.2008.x264.BDRip.1080p.HDReactor.mkv converted, new url: /storage/T/Tetrad.Smerti.3.2008.x264.BDRip.1080p.HDReactor.mp4
+2024-09-30 13:56:42,036 - INFO - /storage/G/The_Godfather_III_(1990)_BDRip_1080p.mkv converted, new url: /storage/G/The_Godfather_III_(1990)_BDRip_1080p.mp4
+2024-09-30 14:04:14,274 - INFO - /storage/T/Toy.Story.1995.x264.BDRip.1080p.Rus.Eng.mkv converted, new url: /storage/T/Toy.Story.1995.x264.BDRip.1080p.Rus.Eng.mp4
+2024-09-30 14:08:04,157 - INFO - /storage/G/Gubka_Bob_kvadratnyez_shtany_2004_1080p.mkv converted, new url: /storage/G/Gubka_Bob_kvadratnyez_shtany_2004_1080p.mp4
+2024-09-30 14:14:15,791 - INFO - /storage/G/gaiver2.mkv converted, new url: /storage/G/gaiver2.mp4
+2024-09-30 14:18:50,376 - INFO - /storage/T/Ted.2012.BDRip.1080p.Rus.Eng.mkv converted, new url: /storage/T/Ted.2012.BDRip.1080p.Rus.Eng.mp4
+2024-09-30 14:24:48,055 - INFO - /storage/G/Ghost.1990.mkv converted, new url: /storage/G/Ghost.1990.mp4
+2024-09-30 14:31:09,829 - INFO - /storage/T/Terminal.2018.WEB-DL.1080p.ExKinoRay.mkv converted, new url: /storage/T/Terminal.2018.WEB-DL.1080p.ExKinoRay.mp4
+2024-09-30 14:31:40,572 - INFO - /storage/G/Get.Hard.720p.WEB-DL.m4v converted, new url: /storage/G/Get.Hard.720p.WEB-DL.mp4
+2024-09-30 14:45:34,068 - INFO - /storage/G/Goodbye.Christopher.Robin.2017.WEB-DL.1080p.ExKinoRay.mkv converted, new url: /storage/G/Goodbye.Christopher.Robin.2017.WEB-DL.1080p.ExKinoRay.mp4
+2024-09-30 14:47:25,703 - INFO - /storage/T/The.Tale.2018.1080p.AMZN.WEB-DL.DDP5.1.H.264-NTGEtHD.mkv converted, new url: /storage/T/The.Tale.2018.1080p.AMZN.WEB-DL.DDP5.1.H.264-NTGEtHD.mp4
+2024-09-30 14:59:23,968 - INFO - /storage/T/Tag.2018.bdriP...108Op.werecut.PROD.mkv converted, new url: /storage/T/Tag.2018.bdriP...108Op.werecut.PROD.mp4
+2024-09-30 15:01:23,482 - ERROR - /storage/T/Tam.gde.chydisha.juvyt.2009.BDRip.720p.mkv is corrupted. Upload a new working file to ftp.sat-dv.ru
+2024-09-30 15:12:54,918 - INFO - /storage/G/The_Godfather_II_(1974)_BDRip_1080p.mkv converted, new url: /storage/G/The_Godfather_II_(1974)_BDRip_1080p.mp4
+2024-09-30 15:17:20,899 - ERROR - Parallel conversion interrupted.
+2024-09-30 15:35:28,770 - INFO - /storage/G/In.the.Tall.Grass.2019.NF.WEBRip.1080p.mkv converted, new url: /storage/G/In.the.Tall.Grass.2019.NF.WEBRip.1080p.mp4
+2024-09-30 15:37:12,750 - INFO - /storage/T/They.Shall.Not.Grow.Old.2018.mkv converted, new url: /storage/T/They.Shall.Not.Grow.Old.2018.mp4
+2024-09-30 15:46:30,363 - INFO - /storage/G/Goosebumps.Haunted.Halloween.2018.WEB-DL.1080p.seleZen.mkv converted, new url: /storage/G/Goosebumps.Haunted.Halloween.2018.WEB-DL.1080p.seleZen.mp4
+2024-09-30 15:51:08,423 - INFO - /storage/T/The.Theory.of.Everything.2014.BDRip.1080p.Rus.Eng.mkv converted, new url: /storage/T/The.Theory.of.Everything.2014.BDRip.1080p.Rus.Eng.mp4
+2024-09-30 15:59:55,745 - INFO - /storage/G/The.Game.Plan.2007.BDRip.1080p.Rus.Eng.mkv converted, new url: /storage/G/The.Game.Plan.2007.BDRip.1080p.Rus.Eng.mp4
+2024-09-30 16:08:25,097 - INFO - /storage/T/Tomorrowland.2015.x264.BDRip.1080p.ExKinoRay.mkv converted, new url: /storage/T/Tomorrowland.2015.x264.BDRip.1080p.ExKinoRay.mp4
+2024-09-30 16:12:18,902 - ERROR - /storage/T/A.Thousand.Words.2012.BDRip.1080GORENOIS.mkv is corrupted. Upload a new working file to ftp.sat-dv.ru
+2024-09-30 16:14:22,754 - INFO - /storage/G/Golodnyie_igry_i_Soika_peresmeshica_1_2014_1080p.mkv converted, new url: /storage/G/Golodnyie_igry_i_Soika_peresmeshica_1_2014_1080p.mp4
+2024-09-30 16:21:46,529 - INFO - /storage/T/Touching.the.Void.2003.x264.BDRip_720p.mkv converted, new url: /storage/T/Touching.the.Void.2003.x264.BDRip_720p.mp4
+2024-09-30 16:28:06,611 - INFO - /storage/G/The.Gangster.the.Cop.the.Devil.2019.1080p.BluRay.x264.mkv converted, new url: /storage/G/The.Gangster.the.Cop.the.Devil.2019.1080p.BluRay.x264.mp4
+2024-09-30 16:42:05,882 - INFO - /storage/T/Tetrad.Smerti.2.2006.x264.BDRip.1080p.element_team.mkv converted, new url: /storage/T/Tetrad.Smerti.2.2006.x264.BDRip.1080p.element_team.mp4
+2024-09-30 16:47:28,859 - INFO - /storage/G/The.Good.Shepherd.2006.1080p.FHD.mkv converted, new url: /storage/G/The.Good.Shepherd.2006.1080p.FHD.mp4
+2024-09-30 16:59:55,750 - INFO - /storage/T/Temnye.Vremena.2017.DUAL.BDRip.1080p.-HELLYWOOD.mkv converted, new url: /storage/T/Temnye.Vremena.2017.DUAL.BDRip.1080p.-HELLYWOOD.mp4
+2024-09-30 17:00:24,647 - INFO - /storage/G/Going.in.Style.2017.Lic.BDRip.1080p.mkv converted, new url: /storage/G/Going.in.Style.2017.Lic.BDRip.1080p.mp4
+2024-09-30 17:02:20,562 - ERROR - Error running ffmpeg: Command '['ffmpeg', '-i', '/storage/G/GOlOgramma.2O16.D.BDRip.72OP.mkv', '-c:v', 'libx264', '-c:a', 'ac3', '-filter:a', 'volume=2.0', '-map', '0:0', '-map', '0:None', '-b:v', '5120k', '-b:a', '192k', '-preset:v', 'ultrafast', '-strict', 'experimental', '-movflags', '+faststart', '/opt/conversion/temp/tmpcvempux2/GOlOgramma.2O16.D.BDRip.72OP.mp4']' returned non-zero exit status 234.
+2024-09-30 17:08:09,888 - INFO - /storage/T/Tarzan.Legenda.720p.i.Ton.mkv converted, new url: /storage/T/Tarzan.Legenda.720p.i.Ton.mp4
+2024-09-30 17:19:13,953 - INFO - /storage/G/The.Grey.Man.2022.WEB-DL.1080p.seleZen.mkv converted, new url: /storage/G/The.Grey.Man.2022.WEB-DL.1080p.seleZen.mp4
+2024-09-30 17:23:47,751 - INFO - /storage/T/The.Trip.2021.1080p_JNS82.mkv converted, new url: /storage/T/The.Trip.2021.1080p_JNS82.mp4
+2024-09-30 17:30:52,773 - INFO - /storage/G/Golova_lastik_1977_1080p.mkv converted, new url: /storage/G/Golova_lastik_1977_1080p.mp4
+2024-09-30 17:31:52,704 - INFO - /storage/T/Tom.and.Jerry.The.Wizard.of.Oz.2011.1080p.mkv converted, new url: /storage/T/Tom.and.Jerry.The.Wizard.of.Oz.2011.1080p.mp4
+2024-09-30 17:46:46,518 - INFO - /storage/T/The.Night.Comes.For.Us.2018.NF.WEBRip.1080p.mkv converted, new url: /storage/T/The.Night.Comes.For.Us.2018.NF.WEBRip.1080p.mp4
+2024-09-30 17:48:46,427 - ERROR - Parallel conversion interrupted.
+2024-10-01 09:26:17,397 - ERROR - Error running ffmpeg: Command '['ffmpeg', '-i', '/storage/G/GOlOgramma.2O16.D.BDRip.72OP.mkv', '-c:v', 'libx264', '-c:a', 'ac3', '-filter:a', 'volume=2.0', '-map', '0:0', '-map', '0:None', '-b:v', '5120k', '-b:a', '192k', '-preset:v', 'ultrafast', '-strict', 'experimental', '-movflags', '+faststart', '/opt/conversion/temp/tmp00elcks9/GOlOgramma.2O16.D.BDRip.72OP.mp4']' returned non-zero exit status 234.
+2024-10-01 09:35:13,811 - INFO - /storage/T/Taksi.2.2000.BDRip.1080p.mkv converted, new url: /storage/T/Taksi.2.2000.BDRip.1080p.mp4
+2024-10-01 09:43:11,003 - INFO - /storage/G/Green.Book.2018.WEB-DL.1080p.mkv converted, new url: /storage/G/Green.Book.2018.WEB-DL.1080p.mp4
+2024-10-01 09:44:38,857 - ERROR - Parallel conversion interrupted.

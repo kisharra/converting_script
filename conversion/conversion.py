@@ -129,6 +129,8 @@ class ConvertTask:
         tuple
             (bool, str) where bool is result of check and str is error or 'No errors found'
         '''
+        # Inform about check
+        print(f"Checking file {output_file} if corrupted...")
         try:
             result = subprocess.run([arg.format(output_file=output_file) for arg in self.ffmpeg_check_command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
             if result.stderr:
@@ -212,7 +214,7 @@ class ConvertTask:
                 if not success:  # if file is corrupted
                     self.db_file.update_status_first_check(file_id, 'Error: check logs', datetime.now().strftime(self.data_format), datetime.now().strftime(self.data_format))
                     self.db_file.update_isconverted_after_fail_check(file_id, True)
-                    logging.error(f'{filename} is corrupted. {check_result}. Upload a new working file to ftp.sat-dv.ru')
+                    logging.error(f'{filename} is corrupted. Upload a new working file to ftp.sat-dv.ru')
                     return  # skip file
 
                 with tempfile.TemporaryDirectory(dir=self.tmp_dir) as temp_dir:
@@ -242,8 +244,9 @@ class ConvertTask:
                                     self.db_file.update_url_file(filename, final_path)  #update table 'Video_Series_Files' on Stalker Portal with new url
                                 os.remove(filename) # remove original file
                             else:
-                                logging.error(f'{filename}: {check_result}')
+                                logging.error(f'{filename} is corrupted after conversion.')
                                 self.db_file.update_of_checking_integrity('Error', datetime.now().strftime(self.data_format), 'Error: check logs', file_id)  #update status of checking
+                                self.db_file.update_isconverted_after_fail_check(file_id, True)
 
                     except Exception as e:  #catch errors
                         error_message = str(e)
