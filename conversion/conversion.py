@@ -66,6 +66,7 @@ class ConvertTask:
         self.log_file = os.path.join(config['path_to_main'], config['log_file'])
         self.data_format = config['data_format']
         self.ffmpeg_cpu = config['ffmpeg_cpu']
+        self.ffmpeg_when_error = config['ffmpeg_when_error']
         self.ffmpeg_check_command = config['ffmpeg_check_command']
         self.bitrate_video_film = config['bitrate_video_film']
         self.bitrate_video_serials = config['bitrate_video_serial']
@@ -109,6 +110,15 @@ class ConvertTask:
         '''
         try:
             command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a, audio_stream_index=audio_stream_index) for arg in self.ffmpeg_cpu]  #run ffmpeg command with cpu which is in config
+            subprocess.run(command, check=True)
+            return True
+        except subprocess.CalledProcessError as e:
+            logging.error(f"Error running ffmpeg: {e}")
+            return False
+
+    def run_ffmpeg_when_error(self, input_file, output_file, bitrate):
+        try:
+            command = [arg.format(input_file=input_file, output_file=output_file, b_v=bitrate, b_a=self.b_a) for arg in self.ffmpeg_when_error]  #run ffmpeg command with cpu which is in config
             subprocess.run(command, check=True)
             return True
         except subprocess.CalledProcessError as e:
@@ -228,7 +238,11 @@ class ConvertTask:
                             bitrate = self.bitrate_video_film  #set bitrate
                         else:
                             bitrate = self.bitrate_video_serials
-                        success = self.run_ffmpeg(filename, output_file, bitrate, selected_index)  #run ffmpeg
+                            
+                        if selected_index is not None:    
+                            success = self.run_ffmpeg(filename, output_file, bitrate, selected_index)  #run ffmpeg
+                        else:
+                            success = self.run_ffmpeg_when_error(filename, output_file, bitrate)
             
                         if success:
                             success, check_result = self.check_integrity(output_file)  #check if output file is corrupted

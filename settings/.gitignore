@@ -1,4 +1,0 @@
-# Ignore databse files in this directory
-*.db
-# Not included
-!.gitignore

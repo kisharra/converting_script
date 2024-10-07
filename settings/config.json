@@ -27,6 +27,20 @@
     "-movflags", "+faststart",
     "{output_file}"
   ],
+  "ffmpeg_when_error": [
+    "ffmpeg",
+    "-i", "{input_file}",
+    "-c:v", "libx264",
+    "-c:a", "ac3",
+    "-filter:a", "volume=2.0",
+    "-map", "0:0",
+    "-b:v", "{b_v}",
+    "-b:a", "{b_a}",
+    "-preset:v", "ultrafast",
+    "-strict", "experimental",
+    "-movflags", "+faststart",
+    "{output_file}"
+  ],
   "ffmpeg_check_command": [
     "ffmpeg",
     "-v", "error",
