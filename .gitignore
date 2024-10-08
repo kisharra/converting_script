@@ -7,7 +7,6 @@
 # disable virt_venv
 virt_env
 # disable logs
-/logs
-/logs/*
+logs/
 # disable db files
-/settings/*.db
+settings/*.db
