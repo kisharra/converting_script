@@ -8,7 +8,6 @@
     "database": "stalker_db"
   },
   "path_to_main": "/opt/conversion",
-  "log_file": "logs/convert_logs.log",
   "directory": "/storage",
   "temp_dir": "/opt/conversion/temp",
   "data_format": "%Y-%m-%d %H:%M:%S",
@@ -33,7 +32,6 @@
     "-c:v", "libx264",
     "-c:a", "ac3",
     "-filter:a", "volume=2.0",
-    "-map", "0:0",
     "-b:v", "{b_v}",
     "-b:a", "{b_a}",
     "-preset:v", "ultrafast",

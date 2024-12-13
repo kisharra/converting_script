@@ -14,6 +14,3 @@ def load_config():
     
 conversion = ConvertTask(load_config()) 
 conversion.parallel_convert()
-
-
-

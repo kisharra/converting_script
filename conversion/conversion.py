@@ -1,18 +1,18 @@
 from datetime import datetime
 import json
-import logging
-from multiprocessing import Pool, current_process
+from multiprocessing import Pool
 import os
 import shutil
 import signal
 import subprocess
-import sys
 import tempfile
 
 from conversion.get_info import Get_Info
-from conversion.db_querry import Db_querry
+from db_query.db_query import Db_query
+from custom_logging.logger import CustomLogger
 
-
+custom_logger = CustomLogger(log_dir="logs", max_files=30, rotation_interval=30)
+logger = custom_logger.get_logger()
 
 class ConvertTask:
     '''Class for converting videos to mp4 format'''
@@ -33,8 +33,6 @@ class ConvertTask:
             path to database file
         maria_db : dict
             config of maria database
-        log_file : str
-            path to log file
         data_format : str
             format of date and time
         ffmpeg_cpu : list of str
@@ -57,13 +55,12 @@ class ConvertTask:
             id of current file
         get_info : Get_Info
             instance of Get_Info class
-        db_file : Db_querry
-            instance of Db_querry class
+        db_file : Db_query
+            instance of Db_query class
         """
         self.config = config
         self.db_file = os.path.join(config['path_to_main'], config['sqlite3'])
         self.maria_db = config['maria_db']
-        self.log_file = os.path.join(config['path_to_main'], config['log_file'])
         self.data_format = config['data_format']
         self.ffmpeg_cpu = config['ffmpeg_cpu']
         self.ffmpeg_when_error = config['ffmpeg_when_error']
@@ -73,8 +70,7 @@ class ConvertTask:
         self.b_a = config['bitrate_audio']
         self.tmp_dir = os.path.join(config['path_to_main'], config['temp_dir'])
         self.get_info = Get_Info(config)
-        self.db_file = Db_querry(config)
-        logging.basicConfig(filename=self.log_file, level=logging.ERROR, format='%(asctime)s:%(message)s')  #logging to file
+        self.db_file = Db_query(config)
     
     def signal_handler(self, signum, frame):
         '''
@@ -113,7 +109,7 @@ class ConvertTask:
             subprocess.run(command, check=True)
             return True
         except subprocess.CalledProcessError as e:
-            logging.error(f"Error running ffmpeg: {e}")
+            logger.error(f"Error running ffmpeg: {e}")
             return False
 
     def run_ffmpeg_when_error(self, input_file, output_file, bitrate):
@@ -122,7 +118,7 @@ class ConvertTask:
             subprocess.run(command, check=True)
             return True
         except subprocess.CalledProcessError as e:
-            logging.error(f"Error running ffmpeg: {e}")
+            logger.error(f"Error running ffmpeg: {e}")
             return False
 
     def check_integrity(self, output_file):
@@ -150,24 +146,6 @@ class ConvertTask:
         except Exception as e:
             return False, str(e)
         
-    def check_nvidia_driver(self):
-        '''
-        Check if nvidia driver is installed
-
-        Returns
-        -------
-        bool
-            result of check
-        '''
-        try:
-            result = subprocess.run(['nvidia-smi'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-            if result.stderr:
-                return False
-            else:
-                return True
-        except Exception as e:
-            return False
-
     def convert_files(self, file_data):
 
         '''
@@ -224,7 +202,7 @@ class ConvertTask:
                 if not success:  # if file is corrupted
                     self.db_file.update_status_first_check(file_id, 'Error: check logs', datetime.now().strftime(self.data_format), datetime.now().strftime(self.data_format))
                     self.db_file.update_isconverted_after_fail_check(file_id, True)
-                    logging.error(f'{filename} is corrupted. Upload a new working file to ftp.sat-dv.ru')
+                    logger.error(f'{filename} is corrupted. Upload a new working file to ftp.sat-dv.ru')
                     return  # skip file
 
                 with tempfile.TemporaryDirectory(dir=self.tmp_dir) as temp_dir:
@@ -251,20 +229,26 @@ class ConvertTask:
                                 shutil.move(output_file, final_path)  #move file to original location
                                 self.db_file.update_status_ending_conversion('done', datetime.now().strftime(self.data_format), check_result, file_id)
                                 video_info = self.get_info.run_ffprobe(final_path)  #get video info of converted file
-                                logging.info(f'{filename} converted, new url: {final_path}')  #logging success
+                                logger.info(f'{filename} converted, new url: {final_path}')  #logging success
                                 if video_info:
                                     streams = self.get_info.streams_data(video_info)  #get streams info of converted file
                                     self.db_file.update_files_table(final_path, True, len(streams), video_info['format']['size'], video_info['format']['bit_rate'], json.dumps(streams), file_id)  #update table 'Files' with new data
                                     self.db_file.update_url_file(filename, final_path)  #update table 'Video_Series_Files' on Stalker Portal with new url
-                                os.remove(filename) # remove original file
+                                if os.path.exists(final_path) and os.path.exists(filename):    
+                                    os.remove(filename) # remove original file
+                                    logger.info(f'{filename} removed')
+                                else:
+                                    logger.error(f'{final_path} unavailable after conversion.')
+                                    self.db_file.update_of_checking_integrity('Error', datetime.now().strftime(self.data_format), 'Error: check logs', file_id)  #update status of checking
+                                    self.db_file.update_isconverted_after_fail_check(file_id, True)
                             else:
-                                logging.error(f'{filename} is corrupted after conversion.')
+                                logger.error(f'{filename} is corrupted after conversion.')
                                 self.db_file.update_of_checking_integrity('Error', datetime.now().strftime(self.data_format), 'Error: check logs', file_id)  #update status of checking
                                 self.db_file.update_isconverted_after_fail_check(file_id, True)
 
                     except Exception as e:  #catch errors
                         error_message = str(e)
-                        logging.error(f'{filename}: {error_message}')  #logging errors
+                        logger.error(f'{filename}: {error_message}')  #logging errors
 
     def parallel_convert(self):
         video_files = self.db_file.select_data()
@@ -272,10 +256,7 @@ class ConvertTask:
             try:
                 pool.map(self.convert_files, video_files)
             except KeyboardInterrupt:
-                self.db_file.global_interrupted_querry(datetime.now().strftime(self.data_format))
-                logging.error("Parallel conversion interrupted.")
+                self.db_file.global_interrupted_query(datetime.now().strftime(self.data_format))
+                logger.error("Сonversion interrupted manually.")
                 pool.terminate()
                 pool.join()
-
-if __name__ == '__main__':
-    pass

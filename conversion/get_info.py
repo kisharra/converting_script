@@ -1,10 +1,12 @@
 import json
-import logging
 import os
 import subprocess
 
-from conversion.db_querry import Db_querry
+from db_query.db_query import Db_query
+from custom_logging.logger import CustomLogger
 
+custom_logger = CustomLogger(log_dir="logs", max_files=30, rotation_interval=30)
+logger = custom_logger.get_logger()
 
 class Get_Info:
     def __init__(self, config):
@@ -24,17 +26,13 @@ class Get_Info:
             path to database file
         ffprobe_command : str
             command to run ffprobe
-        log_file : str
-            path to log file
-        db_querry : Db_querry
-            instance of Db_querry class
+        Db_query : Db_query
+            instance of Db_query class
         """
         self.config = config
         self.db_file = os.path.join(config['path_to_main'], config['sqlite3'])
         self.ffprobe_command = config['ffprobe_command']
-        self.log_file = os.path.join(config['path_to_main'], config['log_file'])
-        logging.basicConfig(filename=self.log_file, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')  # updated logging level
-        self.db_querry = Db_querry(config)
+        self.Db_query = Db_query(config)
 
     def get_all_files_info(self, directory):
         """
@@ -63,9 +61,9 @@ class Get_Info:
                     video_info = self.run_ffprobe(file_path)
                     if video_info:
                         streams = self.streams_data(video_info)
-                        self.db_querry.save_file_data(video_info, streams, is_film=True, is_serial=False)
+                        self.Db_query.save_file_data(video_info, streams, is_film=True, is_serial=False)
                     else:
-                        logging.warning(f"No video info for file: {file_path}")
+                        logger.warning(f"No video info for file: {file_path}")
                                 
                 for subdir in dirs:
                     subdir_path = os.path.join(root, subdir)
@@ -76,9 +74,9 @@ class Get_Info:
                                 video_info = self.run_ffprobe(sub_file_path)
                                 if video_info:
                                     streams = self.streams_data(video_info)
-                                    self.db_querry.save_file_data(video_info, streams, is_film=False, is_serial=True)
+                                    self.Db_query.save_file_data(video_info, streams, is_film=False, is_serial=True)
                                 else:
-                                    logging.warning(f"No video info for file: {sub_file_path}")
+                                    logger.warning(f"No video info for file: {sub_file_path}")
 
         return video_files, subdirectories
     
@@ -98,10 +96,38 @@ class Get_Info:
         video_info = self.run_ffprobe(file_path)
         if video_info:
             streams = self.streams_data(video_info)
-            self.db_querry.save_file_data(video_info, streams, is_film, is_serial)
+            self.Db_query.save_file_data(video_info, streams, is_film, is_serial)
         else:
-            logging.warning(f"No video info for file: {file_path}")
+            logger.warning(f"No video info for file: {file_path}")
 
+    def get_directory_info(self, directory, is_film, is_serial):
+        """
+        Get video info for all files in directory and subdirectories.
+
+        Parameters
+        ----------
+        directory : str
+            path to directory
+        is_film : bool
+            flag indicating if the files is a film
+        is_serial : bool
+            flag indicating if the files is a serial
+        """
+        
+        video_files = []
+        for root, dirs, files in os.walk(directory):
+            for file in files:
+                file_path = os.path.join(root, file)
+                video_files.append(file_path)
+                video_info = self.run_ffprobe(file_path)
+                if video_info:
+                    streams = self.streams_data(video_info)
+                    self.Db_query.save_file_data(video_info, streams, is_film=is_film, is_serial=is_serial)
+                else:
+                    logger.warning(f"No video info for file: {file_path}")
+
+        return video_files
+                                
     def run_ffprobe(self, file_path):
         """
         Run ffprobe command on given file and return its output as a dict.
@@ -123,12 +149,12 @@ class Get_Info:
             try:
                 return json.loads(result.stdout)
             except json.JSONDecodeError:
-                logging.error(f"ERROR - decoding JSON failed with file {file_path}: {result.stdout}")
+                logger.error(f"ERROR - decoding JSON failed with file {file_path}: {result.stdout}")
                 return None
         elif not json.loads(result.stdout):
-            logging.error(f"ERROR - ffprobe failed with file {file_path}: Empty output")
+            logger.error(f"ERROR - ffprobe failed with file {file_path}: Empty output")
         else:
-            logging.error(f"ERROR - ffprobe failed with file {file_path}: {result.stderr}")
+            logger.error(f"ERROR - ffprobe failed with file {file_path}: {result.stderr}")
             print(result.stderr)
             return None
 
@@ -164,5 +190,5 @@ class Get_Info:
         
         return transformed_streams
     
-if __name__ == '__main__':
-    pass
+# if __name__ == '__main__':
+#     pass

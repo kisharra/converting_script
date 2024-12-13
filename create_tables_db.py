@@ -1,5 +1,5 @@
 import os
-from conversion.db_querry import Db_querry
+from db_query.db_query import Db_query
 import json
 
 
@@ -9,5 +9,5 @@ def load_config():
         config = json.load(config_file)
         return config
 
-create_tables_db = Db_querry(load_config())
+create_tables_db = Db_query(load_config())
 create_tables_db.create_table()
